@@ -112,16 +112,17 @@ class UserList:
     return f'Task: {path}\tUser: {userA} -> {userB}\t{cloneCheckResult}'
 
   def crossCheck(self):
-    for taskPath in self.checkPaths:
-      for userA in self.usersTasks:
-        self.checkUser(userA, taskPath)
   
-  def checkUser(self, user, taskPath):
-    for userB in self.usersTasks:
-      if user != userB:
-        res = self.cloneCheck(taskPath, user, userB, LIMIT)
-        if res:
-          print(self.createResultRow(taskPath, user, userB, res))
+    for userA in self.usersTasks:
+      self.checkUser(userA)
+  
+  def checkUser(self, user):
+    for taskPath in self.checkPaths:
+      for userB in self.usersTasks:
+        if user != userB:
+          res = self.cloneCheck(taskPath, user, userB, LIMIT)
+          if res:
+            print(self.createResultRow(taskPath, user, userB, res))
 
 
 if __name__ == "__main__":
@@ -137,4 +138,6 @@ if __name__ == "__main__":
   #userList = UserList(users, 'basic-js', os.path.join('.', 'data'), chechPaths)
 
   userList = UserList(users, 'singolo', os.path.join('.', 'data'), chechPaths)
-  userList.crossCheck()
+  
+  #userList.crossCheck()
+  userList.checkUser('daryaya')
