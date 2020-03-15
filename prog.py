@@ -4,8 +4,8 @@ import os
 from bs4 import BeautifulSoup
 
 
-DOWNLOAD_DATA = False
-LIMIT = 1.0
+DOWNLOAD_DATA = True
+LIMIT = 1
 
 def getPercent(value):
   return f'{value * 100}%'
@@ -131,13 +131,14 @@ if __name__ == "__main__":
   for i in range(1, 23):
     users += parseScores(os.path.join('.', 'scores', f'{i}.html'))
   chechPaths = [
-    os.path.join('index.html'),
-    os.path.join('style.css'),
+    os.path.join('src', 'index.js')
   ]
+
+  users = users[0:100]
 
   #userList = UserList(users, 'basic-js', os.path.join('.', 'data'), chechPaths)
 
-  userList = UserList(users, 'singolo', os.path.join('.', 'data'), chechPaths)
+  userList = UserList(users, 'expression-calculator', os.path.join('.', 'data'), chechPaths)
   
-  #userList.crossCheck()
-  userList.checkUser('daryaya')
+  userList.crossCheck()
+  #userList.checkUser('daryaya')
