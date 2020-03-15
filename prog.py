@@ -70,10 +70,10 @@ class UserList:
     for taskPath in self.checkPaths:
       for userA in self.usersTasks:
         for userB in self.usersTasks:
-          
-          res = self.cloneCheck(taskPath, userA, userB, 0.9)
-          if res:
-            print(self.createResultRow(taskPath, userA, userB, res))
+          if userA != userB:
+            res = self.cloneCheck(taskPath, userA, userB, 0.9)
+            if res:
+              print(self.createResultRow(taskPath, userA, userB, res))
 
 
   # Tests
