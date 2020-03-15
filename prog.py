@@ -18,22 +18,19 @@ class UserTask:
     except OSError:
       print ("Creation of the directory %s failed" % self.path)
 
-def cloneProject(userName, taskName, localPath):
-  path = os.path.join(localPath, userName)
 
-  try:
-    os.makedirs(path)
-    git.Git(path).clone(f'https://github.com/{userName}/{taskName}.git')
-  except OSError:
-    print ("Creation of the directory %s failed" % path)
+class UserList:
+  def __init__(self, users, taskName, localPath):
+    self.users = users
+    self.taskName = taskName
+    self.localPath = localPath
+    self._createUserTasks()
 
-
-def createUserTasks(users, taskName, localPath):
-  usersTasks = []
-  for user in users:
-    usersTasks.append(UserTask(user, taskName, localPath))
-    cloneProject(user, taskName, localPath)
+  def _createUserTasks(self):
+    self.usersTasks = []
+    for user in self.users:
+      self.usersTasks.append(UserTask(user, self.taskName, self.localPath))
 
 if __name__ == "__main__":
   users = ['sovaz1997', 'hallovarvara', 'inq666', 'torchik-slava']
-  tasks = createUserTasks(users, 'basic-js', os.path.join('.', 'data'))
+  userList = UserList(users, 'basic-js', os.path.join('.', 'data'))
