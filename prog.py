@@ -114,11 +114,15 @@ class UserList:
   def crossCheck(self):
     for taskPath in self.checkPaths:
       for userA in self.usersTasks:
-        for userB in self.usersTasks:
-          if userA != userB:
-            res = self.cloneCheck(taskPath, userA, userB, LIMIT)
-            if res:
-              print(self.createResultRow(taskPath, userA, userB, res))
+        self.checkUser(userA, taskPath)
+  
+  def checkUser(self, user, taskPath):
+    for userB in self.usersTasks:
+      if user != userB:
+        res = self.cloneCheck(taskPath, user, userB, LIMIT)
+        if res:
+          print(self.createResultRow(taskPath, user, userB, res))
+
 
 if __name__ == "__main__":
   users = []
