@@ -18,19 +18,34 @@ class UserTask:
     except OSError:
       print ("Creation of the directory %s failed" % self.path)
 
+  def getText(self, path):
+    with open (os.path.join(self.path, self.taskName, path), "r") as f:
+      return f.readlines()
+
 
 class UserList:
-  def __init__(self, users, taskName, localPath):
+  def __init__(self, users, taskName, localPath, checkPaths):
     self.users = users
     self.taskName = taskName
     self.localPath = localPath
+    self.checkPaths = checkPaths
     self._createUserTasks()
+    self._testPaths()
 
   def _createUserTasks(self):
     self.usersTasks = []
     for user in self.users:
       self.usersTasks.append(UserTask(user, self.taskName, self.localPath))
+  
+  def _testPaths(self):
+    for task in self.usersTasks:
+      for path in self.checkPaths:
+        print(task.getText(path))
 
 if __name__ == "__main__":
   users = ['sovaz1997', 'hallovarvara', 'inq666', 'torchik-slava']
-  userList = UserList(users, 'basic-js', os.path.join('.', 'data'))
+  chechPaths = [
+    os.path.join('src', 'carbon-dating.js')
+  ]
+
+  userList = UserList(users, 'basic-js', os.path.join('.', 'data'), chechPaths)
