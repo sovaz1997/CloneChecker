@@ -4,6 +4,8 @@ import os
 from bs4 import BeautifulSoup
 
 
+DOWNLOAD_DATA = True
+
 def getPercent(value):
   return f'{value * 100}%'
 
@@ -26,8 +28,6 @@ def parseScores(path):
       users.add(user.get('data-row-key'))
 
   return list(users)
-  
-  
 
 class UserTask:
   def __init__(self, userName, taskName, localPath):
@@ -39,14 +39,17 @@ class UserTask:
   
   def _cloneProject(self):
     self.path = os.path.join(self.localPath, self.userName)
-    return True
+    self.fullPath = os.path.join(self.path, self.taskName)
+    
+    if not DOWNLOAD_DATA:
+      return True
 
     try:
-      os.makedirs(self.path)
+      os.makedirs(self.fullPath)
     except OSError:
       print ("Creation of the directory %s failed" % self.path)
 
-    if not os.listdir(self.path):
+    if not os.listdir(self.fullPath):
       try:
         git.Git(self.path).clone(f'https://github.com/{self.userName}/{self.taskName}.git')
       except git.exc.GitError:
@@ -125,5 +128,7 @@ if __name__ == "__main__":
     os.path.join('src', 'vigenere-cipher.js')
   ]
 
-  userList = UserList(users, 'basic-js', os.path.join('.', 'data'), chechPaths)
+  #userList = UserList(users, 'basic-js', os.path.join('.', 'data'), chechPaths)
+
+  userList = UserList(users, 'singolo', os.path.join('.', 'data'), chechPaths)
   userList.crossCheck()
