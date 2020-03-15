@@ -1,6 +1,17 @@
 import git
 import os
 
+
+def getPercent(value):
+  return f'{value * 100}%'
+
+def get_jaccard_sim(text1, text2):
+    a = set(text1)
+    b = set(text2)
+    c = a.intersection(b)
+
+    return float(len(c)) / (len(a) + len(b) - len(c))
+
 class UserTask:
   def __init__(self, userName, taskName, localPath):
     self.userName = userName
@@ -35,14 +46,6 @@ class UserList:
     for user in users:
       self.usersTasks[user] = UserTask(user, self.taskName, self.localPath)
   
-  def get_jaccard_sim(self, text1, text2):
-    print(text1)
-    a = set(text1)
-    b = set(text2)
-    c = a.intersection(b)
-
-    return float(len(c)) / (len(a) + len(b) - len(c))
-  
   def compare(self, userNameA, userNameB, path):
     userA = self.usersTasks[userNameA]
     userB = self.usersTasks[userNameB]
@@ -50,11 +53,29 @@ class UserList:
     textA = userA.getText(path)
     textB = userB.getText(path)
 
-    print(textA)
-    print(textB)
+    return get_jaccard_sim(textA, textB)  
 
-    return self.get_jaccard_sim(textA, textB)  
-  
+  def cloneCheck(self, path, userA, userB, thresholdValue):
+    res = self.compare(userA, userB, path)
+
+    if res >= thresholdValue:
+      return f'Clone: {getPercent(res)}\n'
+    return ''
+
+
+  def createResultRow(self, path, userA, userB, cloneCheckResult):
+    return f'Task: {path}\tUser: {userA} -> {userB}\t{cloneCheckResult}'
+
+  def crossCheck(self):
+    for taskPath in self.checkPaths:
+      for userA in self.usersTasks:
+        for userB in self.usersTasks:
+          
+          res = self.cloneCheck(taskPath, userA, userB, 0.9)
+          if res:
+            print(self.createResultRow(taskPath, userA, userB, res))
+
+
   # Tests
   
   def _testPaths(self):
@@ -69,4 +90,4 @@ if __name__ == "__main__":
   ]
 
   userList = UserList(users, 'basic-js', os.path.join('.', 'data'), chechPaths)
-  print(userList.compare('sovaz1997', 'alexeikravchuk', os.path.join('src', 'vigenere-cipher.js')))
+  userList.crossCheck()
