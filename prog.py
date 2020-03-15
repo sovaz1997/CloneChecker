@@ -20,22 +20,42 @@ class UserTask:
 
   def getText(self, path):
     with open (os.path.join(self.path, self.taskName, path), "r") as f:
-      return f.readlines()
-
+      return f.read()
 
 class UserList:
   def __init__(self, users, taskName, localPath, checkPaths):
-    self.users = users
     self.taskName = taskName
     self.localPath = localPath
     self.checkPaths = checkPaths
-    self._createUserTasks()
-    self._testPaths()
+    self.usersTasks = {}
+    
+    self._createUserTasks(users)
 
-  def _createUserTasks(self):
-    self.usersTasks = []
-    for user in self.users:
-      self.usersTasks.append(UserTask(user, self.taskName, self.localPath))
+  def _createUserTasks(self, users):
+    for user in users:
+      self.usersTasks[user] = UserTask(user, self.taskName, self.localPath)
+  
+  def get_jaccard_sim(self, text1, text2):
+    print(text1)
+    a = set(text1)
+    b = set(text2)
+    c = a.intersection(b)
+
+    return float(len(c)) / (len(a) + len(b) - len(c))
+  
+  def compare(self, userNameA, userNameB, path):
+    userA = self.usersTasks[userNameA]
+    userB = self.usersTasks[userNameB]
+
+    textA = userA.getText(path)
+    textB = userB.getText(path)
+
+    print(textA)
+    print(textB)
+
+    return self.get_jaccard_sim(textA, textB)  
+  
+  # Tests
   
   def _testPaths(self):
     for task in self.usersTasks:
@@ -43,9 +63,10 @@ class UserList:
         print(task.getText(path))
 
 if __name__ == "__main__":
-  users = ['sovaz1997', 'hallovarvara', 'inq666', 'torchik-slava']
+  users = ['sovaz1997', 'hallovarvara', 'inq666', 'torchik-slava', 'alexeikravchuk']
   chechPaths = [
     os.path.join('src', 'carbon-dating.js')
   ]
 
   userList = UserList(users, 'basic-js', os.path.join('.', 'data'), chechPaths)
+  print(userList.compare('sovaz1997', 'alexeikravchuk', os.path.join('src', 'vigenere-cipher.js')))
