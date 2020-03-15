@@ -39,6 +39,7 @@ class UserTask:
   
   def _cloneProject(self):
     self.path = os.path.join(self.localPath, self.userName)
+    return True
 
     try:
       os.makedirs(self.path)
@@ -53,7 +54,11 @@ class UserTask:
     return True
 
   def getText(self, path):
-    with open (os.path.join(self.path, self.taskName, path), "r") as f:
+    textPath = os.path.join(self.path, self.taskName, path)
+
+    if not os.path.exists(textPath):
+      return False
+    with open (textPath, "r") as f:
       return f.read()
 
 class UserList:
@@ -83,10 +88,16 @@ class UserList:
     textA = userA.getText(path)
     textB = userB.getText(path)
 
-    return get_jaccard_sim(textA, textB)  
+    if not (textA and textB):
+      return False
+
+    return get_jaccard_sim(textA, textB)
 
   def cloneCheck(self, path, userA, userB, thresholdValue):
     res = self.compare(userA, userB, path)
+
+    if not res:
+      return False
 
     if res >= thresholdValue:
       return f'Clone: {getPercent(res)}\n'
@@ -101,20 +112,15 @@ class UserList:
       for userA in self.usersTasks:
         for userB in self.usersTasks:
           if userA != userB:
-            res = self.cloneCheck(taskPath, userA, userB, 0.95)
+            res = self.cloneCheck(taskPath, userA, userB, 0.98)
             if res:
               print(self.createResultRow(taskPath, userA, userB, res))
 
-
-  # Tests
-  
-  def _testPaths(self):
-    for task in self.usersTasks:
-      for path in self.checkPaths:
-        print(task.getText(path))
-
 if __name__ == "__main__":
-  users = parseScores(os.path.join('.', 'scores', '1.html'))
+  users = []
+
+  for i in range(1, 23):
+    users += parseScores(os.path.join('.', 'scores', f'{i}.html'))
   chechPaths = [
     os.path.join('src', 'vigenere-cipher.js')
   ]
