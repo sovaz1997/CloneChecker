@@ -4,7 +4,8 @@ import os
 from bs4 import BeautifulSoup
 
 
-DOWNLOAD_DATA = True
+DOWNLOAD_DATA = False
+LIMIT = 1.0
 
 def getPercent(value):
   return f'{value * 100}%'
@@ -61,7 +62,7 @@ class UserTask:
 
     if not os.path.exists(textPath):
       return False
-    with open (textPath, "r") as f:
+    with open (textPath, "r", encoding='utf-8', errors='ignore') as f:
       return f.read()
 
 class UserList:
@@ -115,7 +116,7 @@ class UserList:
       for userA in self.usersTasks:
         for userB in self.usersTasks:
           if userA != userB:
-            res = self.cloneCheck(taskPath, userA, userB, 0.98)
+            res = self.cloneCheck(taskPath, userA, userB, LIMIT)
             if res:
               print(self.createResultRow(taskPath, userA, userB, res))
 
@@ -125,7 +126,8 @@ if __name__ == "__main__":
   for i in range(1, 23):
     users += parseScores(os.path.join('.', 'scores', f'{i}.html'))
   chechPaths = [
-    os.path.join('src', 'vigenere-cipher.js')
+    os.path.join('index.html'),
+    os.path.join('style.css'),
   ]
 
   #userList = UserList(users, 'basic-js', os.path.join('.', 'data'), chechPaths)
