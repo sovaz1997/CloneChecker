@@ -4,8 +4,8 @@ import os
 from bs4 import BeautifulSoup
 
 
-DOWNLOAD_DATA = True
-LIMIT = 1
+DOWNLOAD_DATA = False
+LIMIT = .99
 
 def getPercent(value):
   return f'{value * 100}%'
@@ -104,15 +104,14 @@ class UserList:
       return False
 
     if res >= thresholdValue:
-      return f'Clone: {getPercent(res)}\n'
+      return f'Clone: {getPercent(res)}'
     return ''
 
 
   def createResultRow(self, path, userA, userB, cloneCheckResult):
-    return f'Task: {path}\tUser: {userA} -> {userB}\t{cloneCheckResult}'
+    return f'Path: {path}\tUser: {userA} <-> {userB}\t{cloneCheckResult}'
 
   def crossCheck(self):
-  
     for userA in self.usersTasks:
       self.checkUser(userA)
   
@@ -131,14 +130,20 @@ if __name__ == "__main__":
   for i in range(1, 23):
     users += parseScores(os.path.join('.', 'scores', f'{i}.html'))
   chechPaths = [
-    os.path.join('src', 'index.js')
+    os.path.join('.', 'script.js'),
   ]
 
-  users = users[0:100]
+  '''os.path.join('src', 'carbon-dating.js'),
+    os.path.join('src', 'count-cats.js'),
+    os.path.join('src', 'dream-team.js'),
+    os.path.join('src', 'extended-repeater.js'),
+    os.path.join('src', 'hanoi-tower.js'),
+    os.path.join('src', 'recursive-depth.js'),
+    os.path.join('src', 'transform-array.js'),
+    os.path.join('src', 'vigenere-cipher.js'),
+    os.path.join('src', 'what-season.js')'''
 
-  #userList = UserList(users, 'basic-js', os.path.join('.', 'data'), chechPaths)
+  userList = UserList(users, 'singolo', os.path.join('.', 'data'), chechPaths)
 
-  userList = UserList(users, 'expression-calculator', os.path.join('.', 'data'), chechPaths)
-  
+  #userList.checkUser('sovaz1997')
   userList.crossCheck()
-  #userList.checkUser('daryaya')
