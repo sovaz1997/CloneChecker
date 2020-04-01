@@ -8,6 +8,12 @@ DOWNLOAD_DATA = False
 LIMIT = .80
 
 
+def detectComponents(graph, key, detected):
+  for v in graph[key]:
+    if not v in detected:
+      detected.add(v)
+      detectComponents(graph, v, detected)
+
 
 def getPercent(value):
   return f'{value * 100}%'
@@ -117,10 +123,27 @@ class UserList:
     return f'Path: {path}\tUser: {userA} <-> {userB}\t{cloneCheckResult}'
 
   def crossCheck(self):
+    graph = dict()
     for userA in self.usersTasks:
-      self.checkUser(userA)
+      self.checkUser(userA, graph)
+    
+    self.printComponents(graph)
   
-  def checkUser(self, user):
+  def printComponents(self, graph):
+    allComponents = set()
+
+
+    for i in graph.keys():
+      if not i in allComponents:
+        localComponents = set()
+        detectComponents(graph, i, localComponents)
+        allComponents = allComponents.union(localComponents)
+        print(localComponents)
+
+  
+  def checkUser(self, user, graph=None):
+    nodes = set()
+
     with open('./crosscheck.txt', 'w') as f: 
       for taskPath in self.checkPaths:
         for userB in self.usersTasks:
@@ -128,6 +151,18 @@ class UserList:
             res = self.cloneCheck(taskPath, user, userB, LIMIT)
             if res:
               line = self.createResultRow(taskPath, user, userB, res)
+
+              if graph != None:
+                if not user in graph.keys():
+                  graph[user] = []
+                
+                if not userB in graph.keys():
+                  graph[userB] = []
+
+                graph[user].append(userB)
+                graph[userB].append(user)
+                print(graph)
+
               print(line)
               f.write(line + '\n')
 
@@ -152,6 +187,4 @@ if __name__ == "__main__":
     os.path.join('src', 'what-season.js')'''
 
   userList = UserList(users, 'singolo', os.path.join('.', 'data'), chechPaths)
-
-  
   userList.crossCheck()
