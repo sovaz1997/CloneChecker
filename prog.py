@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 
 DOWNLOAD_DATA = False
-LIMIT = .80
+LIMIT = .9
 
 
 def detectComponents(graph, key, detected):
@@ -48,7 +48,7 @@ class UserTask:
     self.localPath = localPath
 
     self.success = self._cloneProject()
-  
+
   def _cloneProject(self):
     self.path = os.path.join(self.localPath, self.userName)
     self.fullPath = os.path.join(self.path, self.taskName)
@@ -124,8 +124,11 @@ class UserList:
 
   def crossCheck(self):
     graph = dict()
+    i = 1
     for userA in self.usersTasks:
+      print(f'{i/len(self.usersTasks)*100}%')
       self.checkUser(userA, graph)
+      i += 1
     
     self.printComponents(graph)
   
@@ -144,7 +147,7 @@ class UserList:
   def checkUser(self, user, graph=None):
     nodes = set()
 
-    with open('./crosscheck.txt', 'w') as f: 
+    with open('crosscheck.txt', 'w') as f: 
       for taskPath in self.checkPaths:
         for userB in self.usersTasks:
           if user != userB:
@@ -161,7 +164,6 @@ class UserList:
 
                 graph[user].append(userB)
                 graph[userB].append(user)
-                print(graph)
 
               print(line)
               f.write(line + '\n')
@@ -173,7 +175,16 @@ if __name__ == "__main__":
   for i in range(1, 23):
     users += parseScores(os.path.join('.', 'scores', f'{i}.html'))
   chechPaths = [
-    os.path.join('.', 'script.js'),
+    os.path.join('src', 'vigenere-cipher.js'),
+    os.path.join('src', 'carbon-dating.js'),
+    os.path.join('src', 'count-cats.js'),
+    os.path.join('src', 'dream-team.js'),
+    os.path.join('src', 'extended-repeater.js'),
+    os.path.join('src', 'hanoi-tower.js'),
+    os.path.join('src', 'recursive-depth.js'),
+    os.path.join('src', 'transform-array.js'),
+    os.path.join('src', 'vigenere-cipher.js'),
+    os.path.join('src', 'what-season.js')
   ]
 
   '''os.path.join('src', 'carbon-dating.js'),
@@ -186,5 +197,6 @@ if __name__ == "__main__":
     os.path.join('src', 'vigenere-cipher.js'),
     os.path.join('src', 'what-season.js')'''
 
-  userList = UserList(users, 'singolo', os.path.join('.', 'data'), chechPaths)
+  userList = UserList(users, 'basic-js', os.path.join('.', 'data'), chechPaths)
+  
   userList.crossCheck()
