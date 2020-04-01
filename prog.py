@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 
 DOWNLOAD_DATA = False
-LIMIT = .3
+LIMIT = .4
 
 
 def detectComponents(graph, key, detected):
@@ -112,25 +112,31 @@ class UserList:
     res = self.compare(userA, userB, path)
 
     if not res:
-      return False, 0
+      return False
 
-    if res >= thresholdValue:
-      return f'Similarity: {getPercent(res)}', res * 100
-    return '', 0
+    return res
 
 
   def createResultRow(self, path, userA, userB, cloneCheckResult):
-    return f'Path: {path}\tUser: {userA} <-> {userB}\t{cloneCheckResult}'
+    return f'Path: {path}\tUser: {userA} <-> {userB}\t{cloneCheckResult * 100}%'
 
   def crossCheck(self):
+    allHist = [0] * 101
+    file = open('crosscheck.txt', 'w')
+
     graph = dict()
     i = 1
     for userA in self.usersTasks:
       print(f'{i/len(self.usersTasks)*100}%')
-      self.checkUser(userA, graph)
+      allHist = [x + y for x, y in zip(allHist, self.checkUser(userA, graph, file))]
+      self.printHist(allHist)
       i += 1
+      file.flush()
     
     self.printComponents(graph)
+    file.close()
+    print(allHist)
+
   
   def printComponents(self, graph):
     allComponents = set()
@@ -143,40 +149,42 @@ class UserList:
         allComponents = allComponents.union(localComponents)
         print(localComponents)
 
-  
-  def checkUser(self, user, graph=None):
-    nodes = set()
-
-    hist = [0] * 101
-
-    with open('crosscheck.txt', 'w') as f: 
-      for taskPath in self.checkPaths:
-        for userB in self.usersTasks:
-          if user != userB:
-            res, val = self.cloneCheck(taskPath, user, userB, LIMIT)
-            hist[round(val)] += 1
-            if res:
-              line = self.createResultRow(taskPath, user, userB, res)
-
-              if graph != None:
-                if not user in graph.keys():
-                  graph[user] = []
-                
-                if not userB in graph.keys():
-                  graph[userB] = []
-
-                graph[user].append(userB)
-                graph[userB].append(user)
-
-              print(line)
-              f.write(line + '\n')
-    
+  def printHist(self, hist):
     index = 0
     for i in hist:
       print(f'{index}% similarity: {i}', end='; ')
       if index % 5 == 0:
         print()
       index += 1
+
+  def checkUser(self, user, graph=None, file=None):
+    nodes = set()
+
+    hist = [0] * 101
+
+    for taskPath in self.checkPaths:
+      for userB in self.usersTasks:
+        if user != userB:
+          res = self.cloneCheck(taskPath, user, userB, LIMIT)
+          hist[round(res * 100)] += 1
+          if res >= LIMIT:
+            line = self.createResultRow(taskPath, user, userB, res)
+
+            if graph != None:
+              if not user in graph.keys():
+                graph[user] = []
+              
+              if not userB in graph.keys():
+                graph[userB] = []
+
+              graph[user].append(userB)
+              graph[userB].append(user)
+
+            print(line)
+            if file:
+              file.write(line + '\n')
+
+    return hist
 
 
 if __name__ == "__main__":
@@ -185,7 +193,7 @@ if __name__ == "__main__":
   for i in range(1, 23):
     users += parseScores(os.path.join('.', 'scores', f'{i}.html'))
   chechPaths = [
-    os.path.join('script.js'),
+    os.path.join('index.html'),
   ]
 
   '''os.path.join('src', 'carbon-dating.js'),
@@ -200,5 +208,5 @@ if __name__ == "__main__":
 
   userList = UserList(users, 'singolo', os.path.join('.', 'data'), chechPaths)
   
-  # userList.crossCheck()
-  userList.checkUser('sovaz1997')
+  userList.crossCheck()
+  # userList.checkUser('hallovarvara')
