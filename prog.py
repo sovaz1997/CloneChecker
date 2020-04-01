@@ -131,7 +131,6 @@ class UserList:
     for userA in self.usersTasks:
       print(f'{i/len(self.usersTasks)*100}%')
       self.checkUser(userA, values, graph, file)
-      print(values)
       i += 1
       file.flush()
     
