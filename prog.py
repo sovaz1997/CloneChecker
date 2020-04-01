@@ -128,17 +128,23 @@ class UserList:
 
     graph = dict()
     i = 1
+
+    plt.show()
+    plt.ion()
     for userA in self.usersTasks:
       print(f'{i/len(self.usersTasks)*100}%')
       self.checkUser(userA, values, graph, file)
       i += 1
       file.flush()
+
+      plt.hist(values, bins=200)
+      plt.show()
+      plt.pause(0.001)
+      plt.clf()
+
     
     self.printComponents(graph)
     file.close()
-
-    plt.hist(values, bins=1000)
-    plt.show()
 
   
   def printComponents(self, graph):
