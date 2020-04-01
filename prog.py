@@ -1,5 +1,7 @@
 import git
 import os
+import matplotlib.pyplot as plt
+import numpy as np
 
 from bs4 import BeautifulSoup
 
@@ -121,21 +123,23 @@ class UserList:
     return f'Path: {path}\tUser: {userA} <-> {userB}\t{cloneCheckResult * 100}%'
 
   def crossCheck(self):
-    allHist = [0] * 101
+    values = []
     file = open('crosscheck.txt', 'w')
 
     graph = dict()
     i = 1
     for userA in self.usersTasks:
       print(f'{i/len(self.usersTasks)*100}%')
-      allHist = [x + y for x, y in zip(allHist, self.checkUser(userA, graph, file))]
-      self.printHist(allHist)
+      self.checkUser(userA, values, graph, file)
+      print(values)
       i += 1
       file.flush()
     
     self.printComponents(graph)
     file.close()
-    print(allHist)
+
+    plt.hist(values, bins=1000)
+    plt.show()
 
   
   def printComponents(self, graph):
@@ -149,15 +153,9 @@ class UserList:
         allComponents = allComponents.union(localComponents)
         print(localComponents)
 
-  def printHist(self, hist):
-    index = 0
-    for i in hist:
-      print(f'{index}% similarity: {i}', end='; ')
-      if index % 5 == 0:
-        print()
-      index += 1
+  
 
-  def checkUser(self, user, graph=None, file=None):
+  def checkUser(self, user, values, graph=None, file=None):
     nodes = set()
 
     hist = [0] * 101
@@ -166,7 +164,9 @@ class UserList:
       for userB in self.usersTasks:
         if user != userB:
           res = self.cloneCheck(taskPath, user, userB, LIMIT)
-          hist[round(res * 100)] += 1
+          # hist[round(res * 100)] += 1
+          if res != False:
+            values.append(res * 100)
           if res >= LIMIT:
             line = self.createResultRow(taskPath, user, userB, res)
 
