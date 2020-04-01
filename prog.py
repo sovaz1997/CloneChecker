@@ -7,12 +7,14 @@ from bs4 import BeautifulSoup
 DOWNLOAD_DATA = False
 LIMIT = .99
 
+
+
 def getPercent(value):
   return f'{value * 100}%'
 
 def get_jaccard_sim(text1, text2):
-    a = set(text1)
-    b = set(text2)
+    a = set(text1.split())
+    b = set(text2.split())
     c = a.intersection(b)
 
     return float(len(c)) / (len(a) + len(b) - len(c))
@@ -116,12 +118,17 @@ class UserList:
       self.checkUser(userA)
   
   def checkUser(self, user):
+    f = open('./crosscheck.txt', 'w')
     for taskPath in self.checkPaths:
       for userB in self.usersTasks:
         if user != userB:
           res = self.cloneCheck(taskPath, user, userB, LIMIT)
           if res:
-            print(self.createResultRow(taskPath, user, userB, res))
+            line = self.createResultRow(taskPath, user, userB, res)
+            print(line)
+            f.write(line + '\n')
+            f.flush()
+    f.close()
 
 
 if __name__ == "__main__":
@@ -130,7 +137,7 @@ if __name__ == "__main__":
   for i in range(1, 23):
     users += parseScores(os.path.join('.', 'scores', f'{i}.html'))
   chechPaths = [
-    os.path.join('.', 'script.js'),
+    os.path.join('.', 'index.html'),
   ]
 
   '''os.path.join('src', 'carbon-dating.js'),
@@ -145,5 +152,5 @@ if __name__ == "__main__":
 
   userList = UserList(users, 'singolo', os.path.join('.', 'data'), chechPaths)
 
-  #userList.checkUser('sovaz1997')
+  # userList.checkUser('edhar13')
   userList.crossCheck()
