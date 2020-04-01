@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 
 DOWNLOAD_DATA = False
-LIMIT = .9
+LIMIT = .3
 
 
 def detectComponents(graph, key, detected):
@@ -112,11 +112,11 @@ class UserList:
     res = self.compare(userA, userB, path)
 
     if not res:
-      return False
+      return False, 0
 
     if res >= thresholdValue:
-      return f'Similarity: {getPercent(res)}'
-    return ''
+      return f'Similarity: {getPercent(res)}', res * 100
+    return '', 0
 
 
   def createResultRow(self, path, userA, userB, cloneCheckResult):
@@ -147,11 +147,14 @@ class UserList:
   def checkUser(self, user, graph=None):
     nodes = set()
 
+    hist = [0] * 101
+
     with open('crosscheck.txt', 'w') as f: 
       for taskPath in self.checkPaths:
         for userB in self.usersTasks:
           if user != userB:
-            res = self.cloneCheck(taskPath, user, userB, LIMIT)
+            res, val = self.cloneCheck(taskPath, user, userB, LIMIT)
+            hist[round(val)] += 1
             if res:
               line = self.createResultRow(taskPath, user, userB, res)
 
@@ -167,6 +170,13 @@ class UserList:
 
               print(line)
               f.write(line + '\n')
+    
+    index = 0
+    for i in hist:
+      print(f'{index}% similarity: {i}', end='; ')
+      if index % 5 == 0:
+        print()
+      index += 1
 
 
 if __name__ == "__main__":
@@ -175,16 +185,7 @@ if __name__ == "__main__":
   for i in range(1, 23):
     users += parseScores(os.path.join('.', 'scores', f'{i}.html'))
   chechPaths = [
-    os.path.join('src', 'vigenere-cipher.js'),
-    os.path.join('src', 'carbon-dating.js'),
-    os.path.join('src', 'count-cats.js'),
-    os.path.join('src', 'dream-team.js'),
-    os.path.join('src', 'extended-repeater.js'),
-    os.path.join('src', 'hanoi-tower.js'),
-    os.path.join('src', 'recursive-depth.js'),
-    os.path.join('src', 'transform-array.js'),
-    os.path.join('src', 'vigenere-cipher.js'),
-    os.path.join('src', 'what-season.js')
+    os.path.join('script.js'),
   ]
 
   '''os.path.join('src', 'carbon-dating.js'),
@@ -197,6 +198,7 @@ if __name__ == "__main__":
     os.path.join('src', 'vigenere-cipher.js'),
     os.path.join('src', 'what-season.js')'''
 
-  userList = UserList(users, 'basic-js', os.path.join('.', 'data'), chechPaths)
+  userList = UserList(users, 'singolo', os.path.join('.', 'data'), chechPaths)
   
-  userList.crossCheck()
+  # userList.crossCheck()
+  userList.checkUser('sovaz1997')
