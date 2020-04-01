@@ -121,17 +121,15 @@ class UserList:
       self.checkUser(userA)
   
   def checkUser(self, user):
-    f = open('./crosscheck.txt', 'w')
-    for taskPath in self.checkPaths:
-      for userB in self.usersTasks:
-        if user != userB:
-          res = self.cloneCheck(taskPath, user, userB, LIMIT)
-          if res:
-            line = self.createResultRow(taskPath, user, userB, res)
-            print(line)
-            f.write(line + '\n')
-            f.flush()
-    f.close()
+    with open('./crosscheck.txt', 'w') as f: 
+      for taskPath in self.checkPaths:
+        for userB in self.usersTasks:
+          if user != userB:
+            res = self.cloneCheck(taskPath, user, userB, LIMIT)
+            if res:
+              line = self.createResultRow(taskPath, user, userB, res)
+              print(line)
+              f.write(line + '\n')
 
 
 if __name__ == "__main__":
