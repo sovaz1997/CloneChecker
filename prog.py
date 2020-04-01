@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 
 DOWNLOAD_DATA = False
-LIMIT = .99
+LIMIT = .80
 
 
 
@@ -16,6 +16,9 @@ def get_jaccard_sim(text1, text2):
     a = set(text1.split())
     b = set(text2.split())
     c = a.intersection(b)
+
+    if len(a) + len(b) - len(c) == 0:
+      return 0
 
     return float(len(c)) / (len(a) + len(b) - len(c))
 
@@ -106,7 +109,7 @@ class UserList:
       return False
 
     if res >= thresholdValue:
-      return f'Clone: {getPercent(res)}'
+      return f'Similarity: {getPercent(res)}'
     return ''
 
 
@@ -137,7 +140,7 @@ if __name__ == "__main__":
   for i in range(1, 23):
     users += parseScores(os.path.join('.', 'scores', f'{i}.html'))
   chechPaths = [
-    os.path.join('.', 'index.html'),
+    os.path.join('.', 'script.js'),
   ]
 
   '''os.path.join('src', 'carbon-dating.js'),
@@ -152,5 +155,5 @@ if __name__ == "__main__":
 
   userList = UserList(users, 'singolo', os.path.join('.', 'data'), chechPaths)
 
-  # userList.checkUser('edhar13')
+  
   userList.crossCheck()
