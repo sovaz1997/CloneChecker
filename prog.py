@@ -2,8 +2,9 @@ import git
 import os
 import matplotlib.pyplot as plt
 import numpy as np
+import pyyed
 
-import hashlib
+import networkx as nx
 
 from bs4 import BeautifulSoup
 
@@ -136,7 +137,6 @@ class UserList:
 
     return res
 
-
   def createResultRow(self, path, userA, userB, cloneCheckResult):
     return f'Path: {path}\tUser: {userA} <-> {userB}\tSimilarity: {cloneCheckResult * 100}%'
 
@@ -144,11 +144,10 @@ class UserList:
     values = []
     file = open('crosscheck.txt', 'w')
 
-    graph = dict()
-    i = 1
+    # graph = dict()
+    graph = nx.Graph()
 
-    '''plt.show()
-    plt.ion()'''
+    i = 1
     
     for userA in self.usersTasks:
       print(f'{i/len(self.usersTasks)*100}%')
@@ -156,11 +155,15 @@ class UserList:
       i += 1
       file.flush()
 
-    self.printComponents(graph)
+    # self.printComponents(graph)
     file.close()
 
     plt.hist(values, bins=1000)
     plt.show()
+
+    nx.write_graphml(graph, 'graph.graphml')
+    # with open('graph.graphml', 'w') as fp:
+     # fp.write(graph.get_graph())
 
   
   def printComponents(self, graph):
@@ -185,23 +188,35 @@ class UserList:
       for userB in self.usersTasks:
         if user != userB:
           res = self.cloneCheck(taskPath, user, userB, LIMIT)
-          # hist[round(res * 100)] += 1
+
           if res != False:
             values.append(res * 100)
           if res >= LIMIT:
             line = self.createResultRow(taskPath, user, userB, res)
 
             if graph != None:
-              if not user in graph.keys():
-                graph[user] = []
+              #if not user in graph.keys():
+              #  graph[user] = []
               
-              if not userB in graph.keys():
-                graph[userB] = []
+              #if not userB in graph.keys():
+              #  graph[userB] = []
+              
 
-              graph[user].append(userB)
-              graph[userB].append(user)
+              if not user in graph.nodes:
+                graph.add_node(user)
+              
+              if not userB in graph.nodes:
+                graph.add_node(userB)
 
-            # print(line)
+              graph.add_edge(user, userB)
+              print(f'{round(res * 100)}%')
+              graph.add_edge(userB, user, label=f'{round(res * 100)}%')
+
+
+
+              #graph[user].append(userB)
+              #graph[userB].append(user)
+
             if file:
               file.write(line + '\n')
 
