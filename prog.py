@@ -111,19 +111,16 @@ class UserList:
     userA = self.usersTasks[userNameA]
     userB = self.usersTasks[userNameB]
 
-    textA = userA.getText(path)
-    textB = userB.getText(path)
-
-
-
-    if not (textA and textB):
-      return False
-    
-
     if not userNameA + path in self.setCash:
+      textA = userA.getText(path)
+      if not textA:
+        return False
       self.setCash[userNameA + path] = set(textA.split())
     
     if not userNameB + path in self.setCash:
+      textB = userB.getText(path)
+      if not textB:
+        return False
       self.setCash[userNameB + path] = set(textB.split())
 
     return get_jaccard_sim(self.setCash[userNameA + path], self.setCash[userNameB + path])
@@ -147,8 +144,8 @@ class UserList:
     graph = dict()
     i = 1
 
-    plt.show()
-    plt.ion()
+    '''plt.show()
+    plt.ion()'''
     
     for userA in self.usersTasks:
       print(f'{i/len(self.usersTasks)*100}%')
@@ -156,14 +153,17 @@ class UserList:
       i += 1
       file.flush()
 
-      plt.hist(values, bins=200)
+      '''plt.hist(values, bins=200)
       plt.show()
       plt.pause(0.001)
-      plt.clf()
+      plt.clf()'''
 
     
     self.printComponents(graph)
     file.close()
+
+    plt.hist(values, bins=1000)
+    plt.show()
 
   
   def printComponents(self, graph):
