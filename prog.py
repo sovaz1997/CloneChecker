@@ -3,6 +3,8 @@ import os
 import matplotlib.pyplot as plt
 import numpy as np
 
+import hashlib
+
 from bs4 import BeautifulSoup
 
 
@@ -20,9 +22,9 @@ def detectComponents(graph, key, detected):
 def getPercent(value):
   return f'{value * 100}%'
 
-def get_jaccard_sim(text1, text2):
-    a = set(text1.split())
-    b = set(text2.split())
+def get_jaccard_sim(a, b):
+    #a = set(text1.split())
+    #b = set(text2.split())
     c = a.intersection(b)
 
     if len(a) + len(b) - len(c) == 0:
@@ -48,6 +50,7 @@ class UserTask:
     self.userName = userName
     self.taskName = taskName
     self.localPath = localPath
+    self.cash = dict()
 
     self.success = self._cloneProject()
 
@@ -75,8 +78,13 @@ class UserTask:
 
     if not os.path.exists(textPath):
       return False
+    
+    if path in self.cash.keys():
+      return self.cash[path]
+    
     with open (textPath, "r", encoding='utf-8', errors='ignore') as f:
-      return f.read()
+      self.cash[path] = f.read()
+      return self.cash[path]
 
 class UserList:
   def __init__(self, users, taskName, localPath, checkPaths):
@@ -84,6 +92,7 @@ class UserList:
     self.localPath = localPath
     self.checkPaths = checkPaths
     self.usersTasks = {}
+    self.setCash = dict()
     
     self._createUserTasks(users)
 
@@ -105,10 +114,19 @@ class UserList:
     textA = userA.getText(path)
     textB = userB.getText(path)
 
+
+
     if not (textA and textB):
       return False
+    
 
-    return get_jaccard_sim(textA, textB)
+    if not userNameA + path in self.setCash:
+      self.setCash[userNameA + path] = set(textA.split())
+    
+    if not userNameB + path in self.setCash:
+      self.setCash[userNameB + path] = set(textB.split())
+
+    return get_jaccard_sim(self.setCash[userNameA + path], self.setCash[userNameB + path])
 
   def cloneCheck(self, path, userA, userB, thresholdValue):
     res = self.compare(userA, userB, path)
@@ -131,6 +149,7 @@ class UserList:
 
     plt.show()
     plt.ion()
+    
     for userA in self.usersTasks:
       print(f'{i/len(self.usersTasks)*100}%')
       self.checkUser(userA, values, graph, file)
