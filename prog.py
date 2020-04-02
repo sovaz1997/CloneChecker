@@ -7,9 +7,12 @@ import hashlib
 
 from bs4 import BeautifulSoup
 
+import sys
+sys.setrecursionlimit(10000)
+
 
 DOWNLOAD_DATA = False
-LIMIT = .4
+LIMIT = 0.4
 
 
 def detectComponents(graph, key, detected):
@@ -135,7 +138,7 @@ class UserList:
 
 
   def createResultRow(self, path, userA, userB, cloneCheckResult):
-    return f'Path: {path}\tUser: {userA} <-> {userB}\t{cloneCheckResult * 100}%'
+    return f'Path: {path}\tUser: {userA} <-> {userB}\tSimilarity: {cloneCheckResult * 100}%'
 
   def crossCheck(self):
     values = []
@@ -153,12 +156,6 @@ class UserList:
       i += 1
       file.flush()
 
-      '''plt.hist(values, bins=200)
-      plt.show()
-      plt.pause(0.001)
-      plt.clf()'''
-
-    
     self.printComponents(graph)
     file.close()
 
@@ -204,7 +201,7 @@ class UserList:
               graph[user].append(userB)
               graph[userB].append(user)
 
-            print(line)
+            # print(line)
             if file:
               file.write(line + '\n')
 
@@ -217,7 +214,7 @@ if __name__ == "__main__":
   for i in range(1, 23):
     users += parseScores(os.path.join('.', 'scores', f'{i}.html'))
   chechPaths = [
-    os.path.join('index.html'),
+    os.path.join('.', 'style.css'),
   ]
 
   '''os.path.join('src', 'carbon-dating.js'),
