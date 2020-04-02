@@ -2,7 +2,6 @@ import git
 import os
 import matplotlib.pyplot as plt
 import numpy as np
-import pyyed
 
 import networkx as nx
 
@@ -11,9 +10,8 @@ from bs4 import BeautifulSoup
 import sys
 sys.setrecursionlimit(10000)
 
-
 DOWNLOAD_DATA = False
-LIMIT = 0.4
+LIMIT = 0.5
 
 
 def detectComponents(graph, key, detected):
@@ -27,8 +25,6 @@ def getPercent(value):
   return f'{value * 100}%'
 
 def get_jaccard_sim(a, b):
-    #a = set(text1.split())
-    #b = set(text2.split())
     c = a.intersection(b)
 
     if len(a) + len(b) - len(c) == 0:
@@ -144,7 +140,6 @@ class UserList:
     values = []
     file = open('crosscheck.txt', 'w')
 
-    # graph = dict()
     graph = nx.Graph()
 
     i = 1
@@ -155,15 +150,12 @@ class UserList:
       i += 1
       file.flush()
 
-    # self.printComponents(graph)
     file.close()
 
     plt.hist(values, bins=1000)
     plt.show()
 
     nx.write_graphml(graph, 'graph.graphml')
-    # with open('graph.graphml', 'w') as fp:
-     # fp.write(graph.get_graph())
 
   
   def printComponents(self, graph):
@@ -195,13 +187,6 @@ class UserList:
             line = self.createResultRow(taskPath, user, userB, res)
 
             if graph != None:
-              #if not user in graph.keys():
-              #  graph[user] = []
-              
-              #if not userB in graph.keys():
-              #  graph[userB] = []
-              
-
               if not user in graph.nodes:
                 graph.add_node(user)
               
@@ -212,16 +197,10 @@ class UserList:
               print(f'{round(res * 100)}%')
               graph.add_edge(userB, user, label=f'{round(res * 100)}%')
 
-
-
-              #graph[user].append(userB)
-              #graph[userB].append(user)
-
             if file:
               file.write(line + '\n')
 
     return hist
-
 
 if __name__ == "__main__":
   users = []
@@ -229,7 +208,7 @@ if __name__ == "__main__":
   for i in range(1, 23):
     users += parseScores(os.path.join('.', 'scores', f'{i}.html'))
   chechPaths = [
-    os.path.join('.', 'style.css'),
+    os.path.join('.', 'expression-calculator.js'),
   ]
 
   '''os.path.join('src', 'carbon-dating.js'),
@@ -243,6 +222,4 @@ if __name__ == "__main__":
     os.path.join('src', 'what-season.js')'''
 
   userList = UserList(users, 'singolo', os.path.join('.', 'data'), chechPaths)
-  
   userList.crossCheck()
-  # userList.checkUser('hallovarvara')
