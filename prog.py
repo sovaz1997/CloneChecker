@@ -11,7 +11,7 @@ import sys
 sys.setrecursionlimit(10000)
 
 DOWNLOAD_DATA = False
-LIMIT = 0.5
+LIMIT = 0.7
 
 
 def detectComponents(graph, key, detected):
@@ -208,7 +208,7 @@ if __name__ == "__main__":
   for i in range(1, 23):
     users += parseScores(os.path.join('.', 'scores', f'{i}.html'))
   chechPaths = [
-    os.path.join('.', 'expression-calculator.js'),
+    os.path.join('src', 'index.js'),
   ]
 
   '''os.path.join('src', 'carbon-dating.js'),
@@ -221,5 +221,5 @@ if __name__ == "__main__":
     os.path.join('src', 'vigenere-cipher.js'),
     os.path.join('src', 'what-season.js')'''
 
-  userList = UserList(users, 'singolo', os.path.join('.', 'data'), chechPaths)
+  userList = UserList(users, 'expression-calculator', os.path.join('.', 'data'), chechPaths)
   userList.crossCheck()

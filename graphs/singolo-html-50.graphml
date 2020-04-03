@@ -1,0 +1,936 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d0" for="edge" attr.name="label" attr.type="string" />
+  <graph edgedefault="undirected">
+    <node id="hallovarvara" />
+    <node id="greendend" />
+    <node id="wadimx199789" />
+    <node id="farruxxamidov" />
+    <node id="zakharovowl" />
+    <node id="azizbek98" />
+    <node id="vansalivan" />
+    <node id="evshipilo" />
+    <node id="innainn" />
+    <node id="anastasiafedotova" />
+    <node id="valentintur" />
+    <node id="segegha" />
+    <node id="jdu4ay" />
+    <node id="ganulanton" />
+    <node id="hardlin3r" />
+    <node id="inq666" />
+    <node id="nordlling" />
+    <node id="tastypurgen" />
+    <node id="saksykov" />
+    <node id="kostyadedulya" />
+    <node id="spakord" />
+    <node id="bol4onok" />
+    <node id="kostyakulak" />
+    <node id="antowa-qq" />
+    <node id="stepbackru" />
+    <node id="dssizh" />
+    <node id="omirbeck" />
+    <node id="zloylis" />
+    <node id="proldov" />
+    <node id="allan-freeman" />
+    <node id="pavelyermakov1" />
+    <node id="jonhmelkov" />
+    <node id="stepan-jam" />
+    <node id="olegbukalov" />
+    <node id="kate-latushkina" />
+    <node id="maksmir" />
+    <node id="ghostfromby" />
+    <node id="vviiiii" />
+    <node id="dashaberashevich" />
+    <node id="protosevichvlad" />
+    <node id="geekynarciss" />
+    <node id="ergl1s" />
+    <node id="bottledmind" />
+    <node id="skaltus" />
+    <node id="mergen08" />
+    <node id="sovaz1997" />
+    <node id="htmlprogrammist" />
+    <node id="alexeyteterin" />
+    <node id="it-malachit" />
+    <node id="miwapen" />
+    <node id="a1essandro11" />
+    <node id="alexgabrielov" />
+    <node id="djjukio" />
+    <node id="antonshchokotov" />
+    <node id="victoriakakdela" />
+    <node id="not-saint" />
+    <node id="cridl189" />
+    <node id="danny-pix" />
+    <node id="unibreakfast" />
+    <node id="yerlan-tleubekov" />
+    <node id="tomirisamirova" />
+    <node id="yuryrazumny" />
+    <node id="mamanikol" />
+    <node id="negorizont" />
+    <node id="golubeva-webmaster" />
+    <node id="gohostwith1r" />
+    <node id="m0rtall" />
+    <node id="ashablyka" />
+    <node id="alfill" />
+    <node id="annastoma" />
+    <node id="olyakov" />
+    <node id="jules0802" />
+    <node id="yuriy17" />
+    <node id="ogeidy" />
+    <node id="arguchinsky" />
+    <node id="gurbanovali" />
+    <node id="soluyanovkonstantin" />
+    <node id="dimabrikach" />
+    <node id="torchik-slava" />
+    <node id="nickolast" />
+    <node id="garza0" />
+    <node id="barton144" />
+    <node id="arcanar7" />
+    <node id="ilyay95" />
+    <node id="doher" />
+    <node id="darkredux" />
+    <node id="ana-karp" />
+    <node id="alswede" />
+    <node id="toffifi" />
+    <node id="galyna-stegniy" />
+    <node id="vestryod" />
+    <node id="samusenkoanton" />
+    <node id="serhiiunhurian" />
+    <node id="khvalkoilya" />
+    <node id="s-maks" />
+    <node id="andyneu8888" />
+    <node id="fokizzz" />
+    <node id="ulmas97" />
+    <node id="viktorsipach" />
+    <node id="bembinov" />
+    <node id="zhosakic" />
+    <node id="dmikol" />
+    <node id="palzunmike" />
+    <node id="kirillzhdanov" />
+    <node id="toxandreev" />
+    <node id="musa98" />
+    <node id="ange2912" />
+    <node id="denis-radkevich" />
+    <node id="dobrozhan" />
+    <node id="denysmoon" />
+    <node id="kirylzuyeu" />
+    <node id="thelionblack" />
+    <node id="fizik003" />
+    <node id="duno3avr" />
+    <node id="ilyashalim" />
+    <node id="algoritmiks" />
+    <node id="artemignatiev908976" />
+    <node id="ilyayudovin" />
+    <node id="yantomchik" />
+    <node id="arthurg91" />
+    <node id="stankevichvitaly" />
+    <node id="sesevenen" />
+    <node id="odanets" />
+    <node id="alinakutya" />
+    <node id="dendenisov" />
+    <node id="karpuskonstantin" />
+    <node id="burik84" />
+    <node id="dalnogirl" />
+    <node id="islombekme" />
+    <node id="annadevyatovskaya" />
+    <node id="samusniko" />
+    <node id="ramon049" />
+    <node id="kotdengit" />
+    <node id="aliaksandrtseliuk" />
+    <node id="peleka" />
+    <node id="anton6467" />
+    <node id="kagafon" />
+    <node id="nastassiamilashevskaya" />
+    <node id="goner52" />
+    <node id="igorkudlo" />
+    <node id="devastator-pwnz" />
+    <node id="vaslisaidmuradov" />
+    <node id="braumwinter" />
+    <node id="igorburenko" />
+    <node id="bobrysh" />
+    <node id="elusiveway" />
+    <node id="julia-svirid" />
+    <node id="eugenefacecontrol" />
+    <node id="konovalovdmtr" />
+    <node id="alexandr9233" />
+    <node id="womajies" />
+    <node id="meldonium1" />
+    <node id="fairmentat" />
+    <node id="kozlovmax" />
+    <node id="shupenkov" />
+    <node id="svatukhin" />
+    <node id="nick877" />
+    <node id="whvt" />
+    <node id="maxdashkevich" />
+    <node id="kiros-albatros" />
+    <node id="pedashhelena" />
+    <node id="artyomblr" />
+    <node id="alexdyabkin" />
+    <node id="aniria555" />
+    <node id="alexandra-gall" />
+    <node id="shuvalovrus" />
+    <node id="hola1309" />
+    <node id="bizent" />
+    <node id="tv-dem" />
+    <node id="befreei" />
+    <node id="nikivi21" />
+    <node id="strsntrong" />
+    <node id="luckyster" />
+    <node id="ginkenta" />
+    <node id="a-klimovich" />
+    <node id="mxxxveton" />
+    <node id="heyotv" />
+    <node id="grenbork" />
+    <node id="torondil" />
+    <node id="nastyshka14" />
+    <node id="dmenliyakhmatov" />
+    <node id="krendil766" />
+    <node id="dim0nby" />
+    <node id="mian19" />
+    <node id="yulbka" />
+    <node id="isunavailable" />
+    <node id="alakaktyc" />
+    <node id="anyyyyyyyyyyyyyyyyyta" />
+    <node id="gabriellji" />
+    <node id="sergeishipilou" />
+    <node id="artiomkuzmenok" />
+    <node id="valeryia7719" />
+    <node id="mary-asl" />
+    <node id="kep1cas" />
+    <node id="perloten" />
+    <node id="friedooo" />
+    <node id="mikisum" />
+    <node id="accidiaqes" />
+    <node id="layksi" />
+    <node id="imafusail" />
+    <node id="mishania261282" />
+    <node id="kanivan" />
+    <node id="yuliya1988-hub" />
+    <node id="dmitry-pashkevich-by" />
+    <node id="olgakostrub" />
+    <node id="chetverty" />
+    <node id="antabachinskaya" />
+    <node id="alexavmp" />
+    <node id="andreymglinets" />
+    <node id="katesid" />
+    <edge source="hallovarvara" target="greendend">
+      <data key="d0">99%</data>
+    </edge>
+    <edge source="hallovarvara" target="wadimx199789">
+      <data key="d0">98%</data>
+    </edge>
+    <edge source="hallovarvara" target="farruxxamidov">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="hallovarvara" target="zakharovowl">
+      <data key="d0">50%</data>
+    </edge>
+    <edge source="hallovarvara" target="azizbek98">
+      <data key="d0">67%</data>
+    </edge>
+    <edge source="hallovarvara" target="vansalivan">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="greendend" target="wadimx199789">
+      <data key="d0">98%</data>
+    </edge>
+    <edge source="greendend" target="farruxxamidov">
+      <data key="d0">99%</data>
+    </edge>
+    <edge source="greendend" target="zakharovowl">
+      <data key="d0">50%</data>
+    </edge>
+    <edge source="greendend" target="azizbek98">
+      <data key="d0">67%</data>
+    </edge>
+    <edge source="greendend" target="vansalivan">
+      <data key="d0">99%</data>
+    </edge>
+    <edge source="wadimx199789" target="farruxxamidov">
+      <data key="d0">98%</data>
+    </edge>
+    <edge source="wadimx199789" target="azizbek98">
+      <data key="d0">68%</data>
+    </edge>
+    <edge source="wadimx199789" target="vansalivan">
+      <data key="d0">98%</data>
+    </edge>
+    <edge source="farruxxamidov" target="zakharovowl">
+      <data key="d0">50%</data>
+    </edge>
+    <edge source="farruxxamidov" target="azizbek98">
+      <data key="d0">67%</data>
+    </edge>
+    <edge source="farruxxamidov" target="vansalivan">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="zakharovowl" target="vansalivan">
+      <data key="d0">50%</data>
+    </edge>
+    <edge source="azizbek98" target="vansalivan">
+      <data key="d0">67%</data>
+    </edge>
+    <edge source="evshipilo" target="innainn">
+      <data key="d0">87%</data>
+    </edge>
+    <edge source="anastasiafedotova" target="valentintur">
+      <data key="d0">68%</data>
+    </edge>
+    <edge source="segegha" target="jdu4ay">
+      <data key="d0">63%</data>
+    </edge>
+    <edge source="ganulanton" target="hardlin3r">
+      <data key="d0">77%</data>
+    </edge>
+    <edge source="inq666" target="nordlling">
+      <data key="d0">96%</data>
+    </edge>
+    <edge source="tastypurgen" target="saksykov">
+      <data key="d0">86%</data>
+    </edge>
+    <edge source="kostyadedulya" target="spakord">
+      <data key="d0">71%</data>
+    </edge>
+    <edge source="bol4onok" target="kostyakulak">
+      <data key="d0">74%</data>
+    </edge>
+    <edge source="antowa-qq" target="stepbackru">
+      <data key="d0">54%</data>
+    </edge>
+    <edge source="antowa-qq" target="dssizh">
+      <data key="d0">52%</data>
+    </edge>
+    <edge source="antowa-qq" target="omirbeck">
+      <data key="d0">55%</data>
+    </edge>
+    <edge source="antowa-qq" target="zloylis">
+      <data key="d0">54%</data>
+    </edge>
+    <edge source="antowa-qq" target="proldov">
+      <data key="d0">51%</data>
+    </edge>
+    <edge source="antowa-qq" target="allan-freeman">
+      <data key="d0">57%</data>
+    </edge>
+    <edge source="stepbackru" target="dssizh">
+      <data key="d0">54%</data>
+    </edge>
+    <edge source="stepbackru" target="omirbeck">
+      <data key="d0">56%</data>
+    </edge>
+    <edge source="stepbackru" target="zloylis">
+      <data key="d0">90%</data>
+    </edge>
+    <edge source="stepbackru" target="proldov">
+      <data key="d0">52%</data>
+    </edge>
+    <edge source="stepbackru" target="allan-freeman">
+      <data key="d0">63%</data>
+    </edge>
+    <edge source="dssizh" target="omirbeck">
+      <data key="d0">54%</data>
+    </edge>
+    <edge source="dssizh" target="zloylis">
+      <data key="d0">55%</data>
+    </edge>
+    <edge source="dssizh" target="allan-freeman">
+      <data key="d0">55%</data>
+    </edge>
+    <edge source="omirbeck" target="odanets">
+      <data key="d0">51%</data>
+    </edge>
+    <edge source="omirbeck" target="zloylis">
+      <data key="d0">57%</data>
+    </edge>
+    <edge source="omirbeck" target="proldov">
+      <data key="d0">53%</data>
+    </edge>
+    <edge source="omirbeck" target="allan-freeman">
+      <data key="d0">60%</data>
+    </edge>
+    <edge source="zloylis" target="proldov">
+      <data key="d0">53%</data>
+    </edge>
+    <edge source="zloylis" target="allan-freeman">
+      <data key="d0">64%</data>
+    </edge>
+    <edge source="proldov" target="allan-freeman">
+      <data key="d0">52%</data>
+    </edge>
+    <edge source="allan-freeman" target="odanets">
+      <data key="d0">50%</data>
+    </edge>
+    <edge source="pavelyermakov1" target="jonhmelkov">
+      <data key="d0">50%</data>
+    </edge>
+    <edge source="pavelyermakov1" target="stepan-jam">
+      <data key="d0">97%</data>
+    </edge>
+    <edge source="jonhmelkov" target="stepan-jam">
+      <data key="d0">51%</data>
+    </edge>
+    <edge source="olegbukalov" target="kate-latushkina">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="maksmir" target="ghostfromby">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="vviiiii" target="dashaberashevich">
+      <data key="d0">83%</data>
+    </edge>
+    <edge source="protosevichvlad" target="geekynarciss">
+      <data key="d0">73%</data>
+    </edge>
+    <edge source="ergl1s" target="bottledmind">
+      <data key="d0">78%</data>
+    </edge>
+    <edge source="skaltus" target="mergen08">
+      <data key="d0">92%</data>
+    </edge>
+    <edge source="sovaz1997" target="htmlprogrammist">
+      <data key="d0">99%</data>
+    </edge>
+    <edge source="alexeyteterin" target="it-malachit">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="alexeyteterin" target="miwapen">
+      <data key="d0">99%</data>
+    </edge>
+    <edge source="alexeyteterin" target="a1essandro11">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="it-malachit" target="miwapen">
+      <data key="d0">99%</data>
+    </edge>
+    <edge source="it-malachit" target="a1essandro11">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="miwapen" target="a1essandro11">
+      <data key="d0">99%</data>
+    </edge>
+    <edge source="alexgabrielov" target="djjukio">
+      <data key="d0">77%</data>
+    </edge>
+    <edge source="antonshchokotov" target="victoriakakdela">
+      <data key="d0">61%</data>
+    </edge>
+    <edge source="not-saint" target="cridl189">
+      <data key="d0">72%</data>
+    </edge>
+    <edge source="not-saint" target="danny-pix">
+      <data key="d0">65%</data>
+    </edge>
+    <edge source="cridl189" target="danny-pix">
+      <data key="d0">55%</data>
+    </edge>
+    <edge source="danny-pix" target="mishania261282">
+      <data key="d0">53%</data>
+    </edge>
+    <edge source="unibreakfast" target="yerlan-tleubekov">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="unibreakfast" target="tomirisamirova">
+      <data key="d0">81%</data>
+    </edge>
+    <edge source="yerlan-tleubekov" target="tomirisamirova">
+      <data key="d0">81%</data>
+    </edge>
+    <edge source="yuryrazumny" target="mamanikol">
+      <data key="d0">85%</data>
+    </edge>
+    <edge source="yuryrazumny" target="negorizont">
+      <data key="d0">90%</data>
+    </edge>
+    <edge source="yuryrazumny" target="golubeva-webmaster">
+      <data key="d0">79%</data>
+    </edge>
+    <edge source="yuryrazumny" target="gohostwith1r">
+      <data key="d0">70%</data>
+    </edge>
+    <edge source="yuryrazumny" target="m0rtall">
+      <data key="d0">79%</data>
+    </edge>
+    <edge source="mamanikol" target="negorizont">
+      <data key="d0">92%</data>
+    </edge>
+    <edge source="mamanikol" target="golubeva-webmaster">
+      <data key="d0">83%</data>
+    </edge>
+    <edge source="mamanikol" target="gohostwith1r">
+      <data key="d0">73%</data>
+    </edge>
+    <edge source="mamanikol" target="m0rtall">
+      <data key="d0">83%</data>
+    </edge>
+    <edge source="negorizont" target="golubeva-webmaster">
+      <data key="d0">82%</data>
+    </edge>
+    <edge source="negorizont" target="gohostwith1r">
+      <data key="d0">73%</data>
+    </edge>
+    <edge source="negorizont" target="m0rtall">
+      <data key="d0">82%</data>
+    </edge>
+    <edge source="golubeva-webmaster" target="gohostwith1r">
+      <data key="d0">86%</data>
+    </edge>
+    <edge source="golubeva-webmaster" target="m0rtall">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="gohostwith1r" target="dim0nby">
+      <data key="d0">52%</data>
+    </edge>
+    <edge source="gohostwith1r" target="m0rtall">
+      <data key="d0">86%</data>
+    </edge>
+    <edge source="ashablyka" target="alfill">
+      <data key="d0">78%</data>
+    </edge>
+    <edge source="annastoma" target="olyakov">
+      <data key="d0">77%</data>
+    </edge>
+    <edge source="jules0802" target="yuriy17">
+      <data key="d0">64%</data>
+    </edge>
+    <edge source="jules0802" target="ogeidy">
+      <data key="d0">63%</data>
+    </edge>
+    <edge source="jules0802" target="arguchinsky">
+      <data key="d0">62%</data>
+    </edge>
+    <edge source="jules0802" target="gurbanovali">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="yuriy17" target="ogeidy">
+      <data key="d0">62%</data>
+    </edge>
+    <edge source="yuriy17" target="arguchinsky">
+      <data key="d0">64%</data>
+    </edge>
+    <edge source="yuriy17" target="gurbanovali">
+      <data key="d0">64%</data>
+    </edge>
+    <edge source="ogeidy" target="arguchinsky">
+      <data key="d0">61%</data>
+    </edge>
+    <edge source="ogeidy" target="gurbanovali">
+      <data key="d0">63%</data>
+    </edge>
+    <edge source="arguchinsky" target="gurbanovali">
+      <data key="d0">62%</data>
+    </edge>
+    <edge source="soluyanovkonstantin" target="dimabrikach">
+      <data key="d0">72%</data>
+    </edge>
+    <edge source="torchik-slava" target="nickolast">
+      <data key="d0">51%</data>
+    </edge>
+    <edge source="garza0" target="barton144">
+      <data key="d0">92%</data>
+    </edge>
+    <edge source="arcanar7" target="ilyay95">
+      <data key="d0">56%</data>
+    </edge>
+    <edge source="doher" target="darkredux">
+      <data key="d0">81%</data>
+    </edge>
+    <edge source="ana-karp" target="alswede">
+      <data key="d0">51%</data>
+    </edge>
+    <edge source="toffifi" target="galyna-stegniy">
+      <data key="d0">50%</data>
+    </edge>
+    <edge source="galyna-stegniy" target="dmikol">
+      <data key="d0">60%</data>
+    </edge>
+    <edge source="galyna-stegniy" target="palzunmike">
+      <data key="d0">53%</data>
+    </edge>
+    <edge source="galyna-stegniy" target="anyyyyyyyyyyyyyyyyyta">
+      <data key="d0">52%</data>
+    </edge>
+    <edge source="vestryod" target="samusenkoanton">
+      <data key="d0">83%</data>
+    </edge>
+    <edge source="vestryod" target="serhiiunhurian">
+      <data key="d0">77%</data>
+    </edge>
+    <edge source="samusenkoanton" target="serhiiunhurian">
+      <data key="d0">68%</data>
+    </edge>
+    <edge source="serhiiunhurian" target="olgakostrub">
+      <data key="d0">62%</data>
+    </edge>
+    <edge source="khvalkoilya" target="s-maks">
+      <data key="d0">65%</data>
+    </edge>
+    <edge source="andyneu8888" target="fokizzz">
+      <data key="d0">89%</data>
+    </edge>
+    <edge source="ulmas97" target="viktorsipach">
+      <data key="d0">62%</data>
+    </edge>
+    <edge source="bembinov" target="zhosakic">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="dmikol" target="palzunmike">
+      <data key="d0">50%</data>
+    </edge>
+    <edge source="kirillzhdanov" target="toxandreev">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="kirillzhdanov" target="musa98">
+      <data key="d0">80%</data>
+    </edge>
+    <edge source="toxandreev" target="musa98">
+      <data key="d0">80%</data>
+    </edge>
+    <edge source="ange2912" target="denis-radkevich">
+      <data key="d0">51%</data>
+    </edge>
+    <edge source="dobrozhan" target="denysmoon">
+      <data key="d0">61%</data>
+    </edge>
+    <edge source="kirylzuyeu" target="thelionblack">
+      <data key="d0">71%</data>
+    </edge>
+    <edge source="fizik003" target="duno3avr">
+      <data key="d0">51%</data>
+    </edge>
+    <edge source="fizik003" target="ilyashalim">
+      <data key="d0">95%</data>
+    </edge>
+    <edge source="duno3avr" target="ilyashalim">
+      <data key="d0">52%</data>
+    </edge>
+    <edge source="algoritmiks" target="artemignatiev908976">
+      <data key="d0">99%</data>
+    </edge>
+    <edge source="ilyayudovin" target="yantomchik">
+      <data key="d0">58%</data>
+    </edge>
+    <edge source="arthurg91" target="stankevichvitaly">
+      <data key="d0">64%</data>
+    </edge>
+    <edge source="arthurg91" target="sesevenen">
+      <data key="d0">60%</data>
+    </edge>
+    <edge source="stankevichvitaly" target="sesevenen">
+      <data key="d0">82%</data>
+    </edge>
+    <edge source="alinakutya" target="dendenisov">
+      <data key="d0">58%</data>
+    </edge>
+    <edge source="karpuskonstantin" target="burik84">
+      <data key="d0">81%</data>
+    </edge>
+    <edge source="dalnogirl" target="islombekme">
+      <data key="d0">50%</data>
+    </edge>
+    <edge source="dalnogirl" target="annadevyatovskaya">
+      <data key="d0">52%</data>
+    </edge>
+    <edge source="dalnogirl" target="samusniko">
+      <data key="d0">50%</data>
+    </edge>
+    <edge source="islombekme" target="alakaktyc">
+      <data key="d0">54%</data>
+    </edge>
+    <edge source="islombekme" target="annadevyatovskaya">
+      <data key="d0">51%</data>
+    </edge>
+    <edge source="islombekme" target="kep1cas">
+      <data key="d0">52%</data>
+    </edge>
+    <edge source="islombekme" target="samusniko">
+      <data key="d0">50%</data>
+    </edge>
+    <edge source="annadevyatovskaya" target="alakaktyc">
+      <data key="d0">55%</data>
+    </edge>
+    <edge source="annadevyatovskaya" target="dmitry-pashkevich-by">
+      <data key="d0">50%</data>
+    </edge>
+    <edge source="annadevyatovskaya" target="katesid">
+      <data key="d0">51%</data>
+    </edge>
+    <edge source="samusniko" target="alakaktyc">
+      <data key="d0">54%</data>
+    </edge>
+    <edge source="ramon049" target="kotdengit">
+      <data key="d0">58%</data>
+    </edge>
+    <edge source="aliaksandrtseliuk" target="peleka">
+      <data key="d0">52%</data>
+    </edge>
+    <edge source="anton6467" target="kagafon">
+      <data key="d0">63%</data>
+    </edge>
+    <edge source="nastassiamilashevskaya" target="goner52">
+      <data key="d0">82%</data>
+    </edge>
+    <edge source="igorkudlo" target="devastator-pwnz">
+      <data key="d0">51%</data>
+    </edge>
+    <edge source="devastator-pwnz" target="aniria555">
+      <data key="d0">51%</data>
+    </edge>
+    <edge source="vaslisaidmuradov" target="braumwinter">
+      <data key="d0">64%</data>
+    </edge>
+    <edge source="igorburenko" target="bobrysh">
+      <data key="d0">76%</data>
+    </edge>
+    <edge source="elusiveway" target="julia-svirid">
+      <data key="d0">64%</data>
+    </edge>
+    <edge source="elusiveway" target="eugenefacecontrol">
+      <data key="d0">55%</data>
+    </edge>
+    <edge source="elusiveway" target="konovalovdmtr">
+      <data key="d0">64%</data>
+    </edge>
+    <edge source="elusiveway" target="alexandr9233">
+      <data key="d0">68%</data>
+    </edge>
+    <edge source="elusiveway" target="womajies">
+      <data key="d0">68%</data>
+    </edge>
+    <edge source="elusiveway" target="meldonium1">
+      <data key="d0">68%</data>
+    </edge>
+    <edge source="elusiveway" target="fairmentat">
+      <data key="d0">68%</data>
+    </edge>
+    <edge source="elusiveway" target="kozlovmax">
+      <data key="d0">70%</data>
+    </edge>
+    <edge source="elusiveway" target="shupenkov">
+      <data key="d0">68%</data>
+    </edge>
+    <edge source="elusiveway" target="svatukhin">
+      <data key="d0">59%</data>
+    </edge>
+    <edge source="elusiveway" target="nick877">
+      <data key="d0">68%</data>
+    </edge>
+    <edge source="julia-svirid" target="konovalovdmtr">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="julia-svirid" target="alexandr9233">
+      <data key="d0">82%</data>
+    </edge>
+    <edge source="julia-svirid" target="womajies">
+      <data key="d0">82%</data>
+    </edge>
+    <edge source="julia-svirid" target="meldonium1">
+      <data key="d0">82%</data>
+    </edge>
+    <edge source="julia-svirid" target="fairmentat">
+      <data key="d0">82%</data>
+    </edge>
+    <edge source="julia-svirid" target="kozlovmax">
+      <data key="d0">83%</data>
+    </edge>
+    <edge source="julia-svirid" target="shupenkov">
+      <data key="d0">82%</data>
+    </edge>
+    <edge source="julia-svirid" target="svatukhin">
+      <data key="d0">71%</data>
+    </edge>
+    <edge source="julia-svirid" target="nick877">
+      <data key="d0">82%</data>
+    </edge>
+    <edge source="eugenefacecontrol" target="kozlovmax">
+      <data key="d0">50%</data>
+    </edge>
+    <edge source="konovalovdmtr" target="alexandr9233">
+      <data key="d0">82%</data>
+    </edge>
+    <edge source="konovalovdmtr" target="womajies">
+      <data key="d0">82%</data>
+    </edge>
+    <edge source="konovalovdmtr" target="meldonium1">
+      <data key="d0">82%</data>
+    </edge>
+    <edge source="konovalovdmtr" target="fairmentat">
+      <data key="d0">82%</data>
+    </edge>
+    <edge source="konovalovdmtr" target="kozlovmax">
+      <data key="d0">83%</data>
+    </edge>
+    <edge source="konovalovdmtr" target="shupenkov">
+      <data key="d0">82%</data>
+    </edge>
+    <edge source="konovalovdmtr" target="svatukhin">
+      <data key="d0">71%</data>
+    </edge>
+    <edge source="konovalovdmtr" target="nick877">
+      <data key="d0">82%</data>
+    </edge>
+    <edge source="alexandr9233" target="womajies">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="alexandr9233" target="meldonium1">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="alexandr9233" target="fairmentat">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="alexandr9233" target="kozlovmax">
+      <data key="d0">70%</data>
+    </edge>
+    <edge source="alexandr9233" target="shupenkov">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="alexandr9233" target="svatukhin">
+      <data key="d0">76%</data>
+    </edge>
+    <edge source="alexandr9233" target="nick877">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="womajies" target="meldonium1">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="womajies" target="fairmentat">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="womajies" target="kozlovmax">
+      <data key="d0">70%</data>
+    </edge>
+    <edge source="womajies" target="shupenkov">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="womajies" target="svatukhin">
+      <data key="d0">76%</data>
+    </edge>
+    <edge source="womajies" target="nick877">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="meldonium1" target="fairmentat">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="meldonium1" target="kozlovmax">
+      <data key="d0">70%</data>
+    </edge>
+    <edge source="meldonium1" target="shupenkov">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="meldonium1" target="svatukhin">
+      <data key="d0">76%</data>
+    </edge>
+    <edge source="meldonium1" target="nick877">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="fairmentat" target="kozlovmax">
+      <data key="d0">70%</data>
+    </edge>
+    <edge source="fairmentat" target="shupenkov">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="fairmentat" target="svatukhin">
+      <data key="d0">76%</data>
+    </edge>
+    <edge source="fairmentat" target="nick877">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="kozlovmax" target="shupenkov">
+      <data key="d0">70%</data>
+    </edge>
+    <edge source="kozlovmax" target="svatukhin">
+      <data key="d0">60%</data>
+    </edge>
+    <edge source="kozlovmax" target="nick877">
+      <data key="d0">70%</data>
+    </edge>
+    <edge source="shupenkov" target="svatukhin">
+      <data key="d0">76%</data>
+    </edge>
+    <edge source="shupenkov" target="nick877">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="svatukhin" target="nick877">
+      <data key="d0">76%</data>
+    </edge>
+    <edge source="whvt" target="maxdashkevich">
+      <data key="d0">88%</data>
+    </edge>
+    <edge source="kiros-albatros" target="pedashhelena">
+      <data key="d0">51%</data>
+    </edge>
+    <edge source="artyomblr" target="alexdyabkin">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="artyomblr" target="aniria555">
+      <data key="d0">79%</data>
+    </edge>
+    <edge source="alexdyabkin" target="aniria555">
+      <data key="d0">79%</data>
+    </edge>
+    <edge source="alexandra-gall" target="shuvalovrus">
+      <data key="d0">53%</data>
+    </edge>
+    <edge source="hola1309" target="bizent">
+      <data key="d0">72%</data>
+    </edge>
+    <edge source="tv-dem" target="befreei">
+      <data key="d0">91%</data>
+    </edge>
+    <edge source="nikivi21" target="strsntrong">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="luckyster" target="ginkenta">
+      <data key="d0">60%</data>
+    </edge>
+    <edge source="a-klimovich" target="mxxxveton">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="heyotv" target="grenbork">
+      <data key="d0">93%</data>
+    </edge>
+    <edge source="torondil" target="nastyshka14">
+      <data key="d0">100%</data>
+    </edge>
+    <edge source="dmenliyakhmatov" target="krendil766">
+      <data key="d0">88%</data>
+    </edge>
+    <edge source="mian19" target="yulbka">
+      <data key="d0">68%</data>
+    </edge>
+    <edge source="isunavailable" target="alakaktyc">
+      <data key="d0">57%</data>
+    </edge>
+    <edge source="alakaktyc" target="mary-asl">
+      <data key="d0">52%</data>
+    </edge>
+    <edge source="alakaktyc" target="kep1cas">
+      <data key="d0">50%</data>
+    </edge>
+    <edge source="alakaktyc" target="perloten">
+      <data key="d0">51%</data>
+    </edge>
+    <edge source="gabriellji" target="sergeishipilou">
+      <data key="d0">65%</data>
+    </edge>
+    <edge source="artiomkuzmenok" target="valeryia7719">
+      <data key="d0">94%</data>
+    </edge>
+    <edge source="friedooo" target="mikisum">
+      <data key="d0">81%</data>
+    </edge>
+    <edge source="accidiaqes" target="layksi">
+      <data key="d0">54%</data>
+    </edge>
+    <edge source="accidiaqes" target="imafusail">
+      <data key="d0">63%</data>
+    </edge>
+    <edge source="kanivan" target="yuliya1988-hub">
+      <data key="d0">66%</data>
+    </edge>
+    <edge source="chetverty" target="antabachinskaya">
+      <data key="d0">65%</data>
+    </edge>
+    <edge source="alexavmp" target="andreymglinets">
+      <data key="d0">53%</data>
+    </edge>
+  </graph>
+</graphml>
