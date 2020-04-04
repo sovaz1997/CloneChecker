@@ -3,6 +3,7 @@ import os
 import matplotlib.pyplot as plt
 import numpy as np
 import glob
+import shutil
 
 import networkx as nx
 
@@ -13,6 +14,7 @@ sys.setrecursionlimit(10000)
 
 DOWNLOAD_DATA = False
 LIMIT = 0.5
+BUNDLE_FILENAME = 'clonecheckbundle.cc'
 
 from pathlib import Path
 
@@ -21,16 +23,26 @@ def concat_files(dir_path, file_pattern):
     res = ''
 
     for path in Path(dir_path).rglob(file_pattern):
-      print(path)
-      with open(path, "r") as infile:
+      with open(path, "r", encoding='utf-8', errors='ignore') as infile:
           res += infile.read()
     return res
 
-def concatenateAll(path, userList, taskName, pattenn):
+def concatenateAll(path, userList, taskName, pattern):
+  newUserList = []
   for user in userList:
-    path = os.path.join(path, user, taskName)
-    with open('clonecheckbundle.cc') as f:
-      f.write(concat_files(path))
+    currentPath = os.path.join(path, user, taskName)
+    nodeModules = os.path.join(currentPath, 'node_modules')
+    
+    if os.path.exists(nodeModules):
+      shutil.rmtree(nodeModules)
+
+    if os.path.exists(currentPath):
+      text = concat_files(currentPath, pattern)
+      if len(text) > 0:
+        newUserList.append(user)
+        with open(os.path.join(currentPath, BUNDLE_FILENAME), 'w', encoding='utf-8') as f:
+          f.write(text)
+  return newUserList
 
 
 def detectComponents(graph, key, detected):
@@ -75,7 +87,22 @@ class UserTask:
   def _cloneProject(self):
     self.path = os.path.join(self.localPath, self.userName)
     self.fullPath = os.path.join(self.path, self.taskName)
-    
+
+    if os.path.exists(self.fullPath):
+      try:
+        repo = git.Repo(f'{self.fullPath}')
+
+        if self.userName == 'torchik-slava':
+          print(repo.remotes.origin.refs)
+
+        priority = ''
+
+        for branch in repo.remotes.origin.refs:
+          if branch != repo.remotes.origin.refs.master and branch != repo.remotes.origin.refs.HEAD:
+            repo.git.checkout(branch)
+      except:
+        pass
+
     if not DOWNLOAD_DATA:
       return True
 
@@ -86,7 +113,8 @@ class UserTask:
 
     if not os.listdir(self.fullPath):
       try:
-        git.Git(self.path).clone(f'https://github.com/{self.userName}/{self.taskName}.git')
+        repo = git.Git(self.path).clone(f'https://github.com/{self.userName}/{self.taskName}.git')
+        
       except git.exc.GitError:
         return False
     return True
@@ -107,26 +135,29 @@ class UserTask:
       return self.cash[path]
 
 class UserList:
-  def __init__(self, users, taskName, localPath, checkPaths, isPattern):
+  def __init__(self, users, taskName, localPath, checkPaths):
     self.taskName = taskName
     self.localPath = localPath
     self.checkPaths = checkPaths
     self.usersTasks = {}
     self.setCash = dict()
-    self.isPattern = isPattern
     
     self._createUserTasks(users)
+
+  def updateUserList(self, userList):
+    for user in list(self.usersTasks):
+      if not user in userList:
+        del self.usersTasks[user]
 
   def _createUserTasks(self, users):
     i = 0
     for user in users:
       task = UserTask(user, self.taskName, self.localPath)
-      
+      #print(f'Downloaded: {i + 1}/{len(users)}')
+      i += 1
       if task.success:
         self.usersTasks[user] = task
-      
-        print(f'Downloaded: {i + 1}/{len(users)}')
-        i += 1
+        #print('Success')
   
   def compare(self, userNameA, userNameB, path):
     userA = self.usersTasks[userNameA]
@@ -182,7 +213,6 @@ class UserList:
   def printComponents(self, graph):
     allComponents = set()
 
-
     for i in graph.keys():
       if not i in allComponents:
         localComponents = set()
@@ -224,11 +254,11 @@ class UserList:
 
 if __name__ == "__main__":
   users = []
-
+  
   for i in range(1, 23):
     users += parseScores(os.path.join('.', 'scores', f'{i}.html'))
   chechPaths = [
-    os.path.join('src', 'index.js'),
+    BUNDLE_FILENAME
   ]
 
   '''os.path.join('src', 'carbon-dating.js'),
@@ -241,4 +271,11 @@ if __name__ == "__main__":
     os.path.join('src', 'vigenere-cipher.js'),
     os.path.join('src', 'what-season.js')'''
 
-  #print(concat_files('data/sovaz1997/basic-js/src', '*.js'))
+  #newUserList = concat_files('data/sovaz1997/basic-js/src', '*.js')
+  
+
+ 
+  userList = UserList(users, 'virtual-keyboard', os.path.join('virtual-keyboard'), chechPaths)
+  users = concatenateAll('virtual-keyboard', users, 'virtual-keyboard', '*.js')
+  userList.updateUserList(users)
+  userList.crossCheck()
