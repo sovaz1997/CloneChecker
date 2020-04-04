@@ -2,6 +2,7 @@ import git
 import os
 import matplotlib.pyplot as plt
 import numpy as np
+import glob
 
 import networkx as nx
 
@@ -11,7 +12,25 @@ import sys
 sys.setrecursionlimit(10000)
 
 DOWNLOAD_DATA = False
-LIMIT = 0.7
+LIMIT = 0.5
+
+from pathlib import Path
+
+
+def concat_files(dir_path, file_pattern):
+    res = ''
+
+    for path in Path(dir_path).rglob(file_pattern):
+      print(path)
+      with open(path, "r") as infile:
+          res += infile.read()
+    return res
+
+def concatenateAll(path, userList, taskName, pattenn):
+  for user in userList:
+    path = os.path.join(path, user, taskName)
+    with open('clonecheckbundle.cc') as f:
+      f.write(concat_files(path))
 
 
 def detectComponents(graph, key, detected):
@@ -31,7 +50,6 @@ def get_jaccard_sim(a, b):
       return 0
 
     return float(len(c)) / (len(a) + len(b) - len(c))
-
 
 def parseScores(path):
   pageText = open(path,'r').read()
@@ -82,17 +100,20 @@ class UserTask:
     if path in self.cash.keys():
       return self.cash[path]
     
+
+
     with open (textPath, "r", encoding='utf-8', errors='ignore') as f:
       self.cash[path] = f.read()
       return self.cash[path]
 
 class UserList:
-  def __init__(self, users, taskName, localPath, checkPaths):
+  def __init__(self, users, taskName, localPath, checkPaths, isPattern):
     self.taskName = taskName
     self.localPath = localPath
     self.checkPaths = checkPaths
     self.usersTasks = {}
     self.setCash = dict()
+    self.isPattern = isPattern
     
     self._createUserTasks(users)
 
@@ -194,7 +215,6 @@ class UserList:
                 graph.add_node(userB)
 
               graph.add_edge(user, userB)
-              print(f'{round(res * 100)}%')
               graph.add_edge(userB, user, label=f'{round(res * 100)}%')
 
             if file:
@@ -221,5 +241,4 @@ if __name__ == "__main__":
     os.path.join('src', 'vigenere-cipher.js'),
     os.path.join('src', 'what-season.js')'''
 
-  userList = UserList(users, 'expression-calculator', os.path.join('.', 'data'), chechPaths)
-  userList.crossCheck()
+  #print(concat_files('data/sovaz1997/basic-js/src', '*.js'))
