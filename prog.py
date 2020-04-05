@@ -88,6 +88,10 @@ class UserTask:
     self.downloadPath = os.path.join(self.localPath, self.userName, self.taskName)
     self.pathToFile = os.path.join(self.downloadPath, self.checkPath)
 
+    self.gitUrl = f'https://github.com/{self.userName}/{self.taskName}'
+    self.urlToFile = f'{self.gitUrl}/blob/master/{self.checkPath}'
+    print(self.urlToFile)
+
     if not DOWNLOAD_DATA:
       return self.isSuccess()
 
@@ -98,7 +102,7 @@ class UserTask:
 
     if not os.listdir(self.downloadPath):
       try:
-        git.Git(self.downloadPath).clone(f'https://github.com/{self.userName}/{self.taskName}.git')
+        git.Git(self.downloadPath).clone(self.gitUrl)
       except git.exc.GitError:
         return False
 
