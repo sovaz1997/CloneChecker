@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup
 import sys
 sys.setrecursionlimit(10000)
 
-DOWNLOAD_DATA = False
+DOWNLOAD_DATA = True
 LIMIT = 0.5
 BUNDLE_FILENAME = 'clonecheckbundle.cc'
 
@@ -88,7 +88,7 @@ class UserTask:
     self.path = os.path.join(self.localPath, self.userName)
     self.fullPath = os.path.join(self.path, self.taskName)
 
-    if os.path.exists(self.fullPath):
+    '''if os.path.exists(self.fullPath):
       try:
         repo = git.Repo(f'{self.fullPath}')
 
@@ -101,7 +101,7 @@ class UserTask:
           if branch != repo.remotes.origin.refs.master and branch != repo.remotes.origin.refs.HEAD:
             repo.git.checkout(branch)
       except:
-        pass
+        pass'''
 
     if not DOWNLOAD_DATA:
       return True
@@ -153,11 +153,11 @@ class UserList:
     i = 0
     for user in users:
       task = UserTask(user, self.taskName, self.localPath)
-      #print(f'Downloaded: {i + 1}/{len(users)}')
+      print(f'Downloaded: {i + 1}/{len(users)}')
       i += 1
       if task.success:
         self.usersTasks[user] = task
-        #print('Success')
+        print('Success')
   
   def compare(self, userNameA, userNameB, path):
     userA = self.usersTasks[userNameA]
