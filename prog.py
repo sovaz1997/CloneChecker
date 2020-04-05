@@ -80,7 +80,7 @@ class UserTask:
     self.taskName = taskName
     self.localPath = localPath
     self.checkPath = checkPath
-    self.cash = dict()
+    self.cash = None
 
     self.success = self._cloneProject()
 
@@ -90,7 +90,6 @@ class UserTask:
 
     self.gitUrl = f'https://github.com/{self.userName}/{self.taskName}'
     self.urlToFile = f'{self.gitUrl}/blob/master/{self.checkPath}'
-    print(self.urlToFile)
 
     if not DOWNLOAD_DATA:
       return self.isSuccess()
@@ -112,13 +111,13 @@ class UserTask:
     return os.path.exists(self.pathToFile)
 
   def getText(self):
-    if self.pathToFile in list(self.cash):
-      return self.cash[self.pathToFile]
+    if self.cash:
+      return self.cash
     
 
     with open (self.pathToFile, "r", encoding='utf-8', errors='ignore') as f:
-      self.cash[self.pathToFile] = f.read()
-      return self.cash[self.pathToFile]
+      self.cash = f.read()
+      return self.cash
 
 class UserList:
   def __init__(self, users, taskName, localPath, checkPath):
