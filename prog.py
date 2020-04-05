@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup
 import sys
 sys.setrecursionlimit(10000)
 
-DOWNLOAD_DATA = True
+DOWNLOAD_DATA = False
 LIMIT = 0.5
 BUNDLE_FILENAME = 'clonecheckbundle.cc'
 
@@ -43,7 +43,6 @@ def concatenateAll(path, userList, taskName, pattern):
         with open(os.path.join(currentPath, BUNDLE_FILENAME), 'w', encoding='utf-8') as f:
           f.write(text)
   return newUserList
-
 
 def detectComponents(graph, key, detected):
   for v in graph[key]:
@@ -76,69 +75,52 @@ def parseScores(path):
   return list(users)
 
 class UserTask:
-  def __init__(self, userName, taskName, localPath):
+  def __init__(self, userName, taskName, localPath, checkPath):
     self.userName = userName
     self.taskName = taskName
     self.localPath = localPath
+    self.checkPath = checkPath
     self.cash = dict()
 
     self.success = self._cloneProject()
 
   def _cloneProject(self):
-    self.path = os.path.join(self.localPath, self.userName)
-    self.fullPath = os.path.join(self.path, self.taskName)
-
-    '''if os.path.exists(self.fullPath):
-      try:
-        repo = git.Repo(f'{self.fullPath}')
-
-        if self.userName == 'torchik-slava':
-          print(repo.remotes.origin.refs)
-
-        priority = ''
-
-        for branch in repo.remotes.origin.refs:
-          if branch != repo.remotes.origin.refs.master and branch != repo.remotes.origin.refs.HEAD:
-            repo.git.checkout(branch)
-      except:
-        pass'''
+    self.downloadPath = os.path.join(self.localPath, self.userName, self.taskName)
+    self.pathToFile = os.path.join(self.downloadPath, self.checkPath)
 
     if not DOWNLOAD_DATA:
-      return True
+      return self.isSuccess()
 
     try:
-      os.makedirs(self.fullPath)
+      os.makedirs(self.downloadPath)
     except OSError:
-      print ("Creation of the directory %s failed" % self.path)
+      print ("Creation of the directory %s failed" % self.downloadPath)
 
-    if not os.listdir(self.fullPath):
+    if not os.listdir(self.downloadPath):
       try:
-        repo = git.Git(self.path).clone(f'https://github.com/{self.userName}/{self.taskName}.git')
-        
+        git.Git(self.downloadPath).clone(f'https://github.com/{self.userName}/{self.taskName}.git')
       except git.exc.GitError:
         return False
-    return True
 
-  def getText(self, path):
-    textPath = os.path.join(self.path, self.taskName, path)
+    return self.isSuccess()
 
-    if not os.path.exists(textPath):
-      return False
+  def isSuccess(self):
+    return os.path.exists(self.pathToFile)
+
+  def getText(self):
+    if self.pathToFile in list(self.cash):
+      return self.cash[self.pathToFile]
     
-    if path in self.cash.keys():
-      return self.cash[path]
-    
 
-
-    with open (textPath, "r", encoding='utf-8', errors='ignore') as f:
-      self.cash[path] = f.read()
-      return self.cash[path]
+    with open (self.pathToFile, "r", encoding='utf-8', errors='ignore') as f:
+      self.cash[self.pathToFile] = f.read()
+      return self.cash[self.pathToFile]
 
 class UserList:
-  def __init__(self, users, taskName, localPath, checkPaths):
+  def __init__(self, users, taskName, localPath, checkPath):
     self.taskName = taskName
     self.localPath = localPath
-    self.checkPaths = checkPaths
+    self.checkPath = checkPath
     self.usersTasks = {}
     self.setCash = dict()
     
@@ -152,41 +134,42 @@ class UserList:
   def _createUserTasks(self, users):
     i = 0
     for user in users:
-      task = UserTask(user, self.taskName, self.localPath)
+      task = UserTask(user, self.taskName, self.localPath, self.checkPath)
       print(f'Downloaded: {i + 1}/{len(users)}')
       i += 1
       if task.success:
         self.usersTasks[user] = task
         print('Success')
   
-  def compare(self, userNameA, userNameB, path):
+  def compare(self, userNameA, userNameB):
     userA = self.usersTasks[userNameA]
     userB = self.usersTasks[userNameB]
 
-    if not userNameA + path in self.setCash:
-      textA = userA.getText(path)
+    if not userNameA + self.checkPath in self.setCash:
+      textA = userA.getText()
       if not textA:
         return False
-      self.setCash[userNameA + path] = set(textA.split())
+      self.setCash[userNameA + self.checkPath] = set(textA.split())
     
-    if not userNameB + path in self.setCash:
-      textB = userB.getText(path)
+    if not userNameB + self.checkPath in self.setCash:
+      textB = userB.getText()
       if not textB:
         return False
-      self.setCash[userNameB + path] = set(textB.split())
+      self.setCash[userNameB + self.checkPath] = set(textB.split())
 
-    return get_jaccard_sim(self.setCash[userNameA + path], self.setCash[userNameB + path])
 
-  def cloneCheck(self, path, userA, userB, thresholdValue):
-    res = self.compare(userA, userB, path)
+    return get_jaccard_sim(self.setCash[userNameA + self.checkPath], self.setCash[userNameB + self.checkPath])
+
+  def cloneCheck(self, userA, userB, thresholdValue):
+    res = self.compare(userA, userB)
 
     if not res:
       return False
 
     return res
 
-  def createResultRow(self, path, userA, userB, cloneCheckResult):
-    return f'Path: {path}\tUser: {userA} <-> {userB}\tSimilarity: {cloneCheckResult * 100}%'
+  def createResultRow(self, userA, userB, cloneCheckResult):
+    return f'Path: {self.checkPath}\tUser: {userA} <-> {userB}\tSimilarity: {cloneCheckResult * 100}%'
 
   def crossCheck(self):
     values = []
@@ -208,7 +191,6 @@ class UserList:
     plt.show()
 
     nx.write_graphml(graph, 'graph.graphml')
-
   
   def printComponents(self, graph):
     allComponents = set()
@@ -220,46 +202,40 @@ class UserList:
         allComponents = allComponents.union(localComponents)
         print(localComponents)
 
-  
-
   def checkUser(self, user, values, graph=None, file=None):
     nodes = set()
 
     hist = [0] * 101
 
-    for taskPath in self.checkPaths:
-      for userB in self.usersTasks:
-        if user != userB:
-          res = self.cloneCheck(taskPath, user, userB, LIMIT)
+    for userB in self.usersTasks:
+      if user != userB:
+        res = self.cloneCheck(user, userB, LIMIT)
 
-          if res != False:
-            values.append(res * 100)
-          if res >= LIMIT:
-            line = self.createResultRow(taskPath, user, userB, res)
+        if res != False:
+          values.append(res * 100)
+        if res >= LIMIT:
+          line = self.createResultRow(user, userB, res)
 
-            if graph != None:
-              if not user in graph.nodes:
-                graph.add_node(user)
-              
-              if not userB in graph.nodes:
-                graph.add_node(userB)
+          if graph != None:
+            if not user in graph.nodes:
+              graph.add_node(user)
+            
+            if not userB in graph.nodes:
+              graph.add_node(userB)
 
-              graph.add_edge(user, userB)
-              graph.add_edge(userB, user, label=f'{round(res * 100)}%')
+            graph.add_edge(user, userB)
+            graph.add_edge(userB, user, label=f'{round(res * 100)}%')
 
-            if file:
-              file.write(line + '\n')
+          if file:
+            file.write(line + '\n')
 
     return hist
 
 if __name__ == "__main__":
   users = []
   
-  for i in range(1, 23):
+  for i in range(1, 18):
     users += parseScores(os.path.join('.', 'scores', f'{i}.html'))
-  chechPaths = [
-    BUNDLE_FILENAME
-  ]
 
   '''os.path.join('src', 'carbon-dating.js'),
     os.path.join('src', 'count-cats.js'),
@@ -274,8 +250,7 @@ if __name__ == "__main__":
   #newUserList = concat_files('data/sovaz1997/basic-js/src', '*.js')
   
 
- 
-  userList = UserList(users, 'virtual-keyboard', os.path.join('virtual-keyboard'), chechPaths)
-  users = concatenateAll('virtual-keyboard', users, 'virtual-keyboard', '*.js')
-  userList.updateUserList(users)
+  userList = UserList(users, 'singolo', os.path.join('data'), 'index.html')
+  # users = concatenateAll('virtual-keyboard', users, 'virtual-keyboard', '*.js')
+  #userList.updateUserList()
   userList.crossCheck()
