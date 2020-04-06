@@ -13,8 +13,8 @@ from bs4 import BeautifulSoup
 import sys
 sys.setrecursionlimit(10000)
 
-DOWNLOAD_DATA = False
-LIMIT = 0.4
+DOWNLOAD_DATA = True
+LIMIT = 0.5
 BUNDLE_FILENAME = 'clonecheckbundle.cc'
 
 from pathlib import Path
@@ -88,8 +88,8 @@ class UserTask:
     self.success = self._cloneProject()
 
   def _cloneProject(self):
-    self.downloadPath = os.path.join(self.localPath, self.userName, self.taskName)
-    self.pathToFile = os.path.join(self.downloadPath, self.checkPath)
+    self.downloadPath = os.path.join(self.localPath, self.userName)
+    self.pathToFile = os.path.join(self.downloadPath, self.taskName, self.checkPath)
 
     self.gitUrl = f'https://github.com/{self.userName}/{self.taskName}'
     self.urlToFile = f'{self.gitUrl}/blob/master/{self.checkPath}'
@@ -279,7 +279,7 @@ if __name__ == "__main__":
 
   #newUserList = concat_files('data/sovaz1997/basic-js/src', '*.js')
   
-  userList = UserList(users, 'singolo', os.path.join('data'), 'style.css')
-  # users = concatenateAll('virtual-keyboard', users, 'virtual-keyboard', '*.js')
-  #userList.updateUserList()
+  userList = UserList(users, 'virtual-keyboard', os.path.join('virtual-keyboard'), BUNDLE_FILENAME)
+  users = concatenateAll('virtual-keyboard', users, 'virtual-keyboard', '*.js')
+  userList.updateUserList()
   userList.crossCheck()
