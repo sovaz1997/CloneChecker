@@ -20,8 +20,8 @@ BUNDLE_FILENAME = 'clonecheckbundle.cc'
 from pathlib import Path
 
 
-def svgReplace(links):
-  with open('svg.svg', 'r') as file :
+def svgReplace(filename, links):
+  with open(filename, 'r') as file:
     filedata = file.read()
 
 
@@ -29,7 +29,7 @@ def svgReplace(links):
     filedata = filedata.replace(f'>{user}<', f'>{links[user]}<')
 
   # Write the file out again
-  with open('output.svg', 'w') as file:
+  with open(filename, 'w') as file:
     file.write(filedata)
 
 
@@ -298,10 +298,10 @@ if __name__ == "__main__":
 
   #newUserList = concat_files('data/sovaz1997/basic-js/src', '*.js')
   
-  userList = UserList(users, 'virtual-keyboard', os.path.join('virtual-keyboard'), BUNDLE_FILENAME)
+  userList = UserList(users, 'expression-calculator', os.path.join('data'), 'src/index.js')
   
   links = userList.getLinks()
-  svgReplace(links)
+  svgReplace('expression-calculator.svg', links)
 
 
   #users = concatenateAll('virtual-keyboard', users, 'virtual-keyboard', '*.js')
