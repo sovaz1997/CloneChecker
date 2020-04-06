@@ -5,6 +5,7 @@ import numpy as np
 import glob
 import shutil
 import csv
+import re
 
 import networkx as nx
 
@@ -14,7 +15,7 @@ import sys
 sys.setrecursionlimit(10000)
 
 DOWNLOAD_DATA = False
-LIMIT = 0.5
+LIMIT = 0.55
 BUNDLE_FILENAME = 'clonecheckbundle.cc'
 
 from pathlib import Path
@@ -134,6 +135,13 @@ class UserTask:
     with open (self.pathToFile, "r", encoding='utf-8', errors='ignore') as f:
       self.cash = f.read()
       return self.cash
+  
+  def check(self, value):
+    text = self.getText()
+
+    regexp = re.compile(value)
+    return regexp.search(text)
+    #return self.getText().find(value) != -1
 
 class UserList:
   def __init__(self, users, taskName, localPath, checkPath):
@@ -190,6 +198,13 @@ class UserList:
   def createResultRow(self, userA, userB, cloneCheckResult):
     return f'Path: {self.checkPath}\tUser: {userA} <-> {userB}\tSimilarity: {cloneCheckResult * 100}%'
 
+  def checkByValue(self, value):
+    res = []
+    for user in self.usersTasks:
+      if self.usersTasks[user].check(value):
+        res.append(user)
+    return res
+
   def crossCheck(self):
     values = []
     file = open('crosscheck.txt', 'w')
@@ -233,15 +248,17 @@ class UserList:
       res[task] = f'<a target="_blank" href="{self.usersTasks[task].urlToFile}">{task}</a>'
     return res
 
-  def printComponents(self, graph):
+  def getComponents(self, graph):
     allComponents = set()
+    res = []
 
     for i in graph.keys():
       if not i in allComponents:
         localComponents = set()
         detectComponents(graph, i, localComponents)
         allComponents = allComponents.union(localComponents)
-        print(localComponents)
+        res.append(localComponents)
+    return res
 
   def checkUser(self, user, values, graph=None, graphCsv=None, file=None):
     nodes = set()
@@ -299,9 +316,11 @@ if __name__ == "__main__":
   #newUserList = concat_files('data/sovaz1997/basic-js/src', '*.js')
   
   userList = UserList(users, 'expression-calculator', os.path.join('data'), 'src/index.js')
+  #userList.crossCheck()
+  print(len(userList.checkByValue(r'new Function')))
   
-  links = userList.getLinks()
-  svgReplace('expression-calculator.svg', links)
+  #links = userList.getLinks()
+  #svgReplace('expression-calculator.svg', links)
 
 
   #users = concatenateAll('virtual-keyboard', users, 'virtual-keyboard', '*.js')
