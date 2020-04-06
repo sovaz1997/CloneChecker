@@ -13,11 +13,24 @@ from bs4 import BeautifulSoup
 import sys
 sys.setrecursionlimit(10000)
 
-DOWNLOAD_DATA = True
+DOWNLOAD_DATA = False
 LIMIT = 0.5
 BUNDLE_FILENAME = 'clonecheckbundle.cc'
 
 from pathlib import Path
+
+
+def svgReplace(links):
+  with open('svg.svg', 'r') as file :
+    filedata = file.read()
+
+
+  for user in links:
+    filedata = filedata.replace(f'>{user}<', f'>{links[user]}<')
+
+  # Write the file out again
+  with open('output.svg', 'w') as file:
+    file.write(filedata)
 
 
 def concat_files(dir_path, file_pattern):
@@ -214,6 +227,12 @@ class UserList:
         line.append(data)
         writer.writerow(line)
   
+  def getLinks(self):
+    res = dict()
+    for task in self.usersTasks:
+      res[task] = f'<a target="_blank" href="{self.usersTasks[task].urlToFile}">{task}</a>'
+    return res
+
   def printComponents(self, graph):
     allComponents = set()
 
@@ -280,6 +299,10 @@ if __name__ == "__main__":
   #newUserList = concat_files('data/sovaz1997/basic-js/src', '*.js')
   
   userList = UserList(users, 'virtual-keyboard', os.path.join('virtual-keyboard'), BUNDLE_FILENAME)
-  users = concatenateAll('virtual-keyboard', users, 'virtual-keyboard', '*.js')
-  userList.updateUserList()
-  userList.crossCheck()
+  
+  links = userList.getLinks()
+  svgReplace(links)
+
+
+  #users = concatenateAll('virtual-keyboard', users, 'virtual-keyboard', '*.js')
+  #userList.updateUserList(users)
