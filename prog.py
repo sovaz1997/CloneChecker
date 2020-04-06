@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import glob
 import shutil
+import csv
 
 import networkx as nx
 
@@ -13,7 +14,7 @@ import sys
 sys.setrecursionlimit(10000)
 
 DOWNLOAD_DATA = False
-LIMIT = 0.5
+LIMIT = 0.4
 BUNDLE_FILENAME = 'clonecheckbundle.cc'
 
 from pathlib import Path
@@ -44,6 +45,7 @@ def concatenateAll(path, userList, taskName, pattern):
           f.write(text)
   return newUserList
 
+
 def detectComponents(graph, key, detected):
   for v in graph[key]:
     if not v in detected:
@@ -62,8 +64,9 @@ def get_jaccard_sim(a, b):
 
     return float(len(c)) / (len(a) + len(b) - len(c))
 
+
 def parseScores(path):
-  pageText = open(path,'r').read()
+  pageText = open(path, 'r').read()
   page = BeautifulSoup(pageText, 'html.parser')
   
   users = set()
@@ -179,12 +182,13 @@ class UserList:
     file = open('crosscheck.txt', 'w')
 
     graph = nx.Graph()
+    graphCsv = dict()
 
     i = 1
     
     for userA in self.usersTasks:
       print(f'{i/len(self.usersTasks)*100}%')
-      self.checkUser(userA, values, graph, file)
+      self.checkUser(userA, values, graph, graphCsv, file)
       i += 1
       file.flush()
 
@@ -194,6 +198,21 @@ class UserList:
     plt.show()
 
     nx.write_graphml(graph, 'graph.graphml')
+
+    with open('results.csv', 'w') as f:
+      writer = csv.writer(f, delimiter=',')
+      writer.writerow(['Number', 'User', 'Url', 'Data'])
+
+      i = 1
+      for node in graphCsv:
+        line = [i, node, self.usersTasks[node].urlToFile]
+        
+        data = ''
+        for user in graphCsv[node]:
+          data += f'{user}: {graphCsv[node][user]}; '
+        i += 1
+        line.append(data)
+        writer.writerow(line)
   
   def printComponents(self, graph):
     allComponents = set()
@@ -205,7 +224,7 @@ class UserList:
         allComponents = allComponents.union(localComponents)
         print(localComponents)
 
-  def checkUser(self, user, values, graph=None, file=None):
+  def checkUser(self, user, values, graph=None, graphCsv=None, file=None):
     nodes = set()
 
     hist = [0] * 101
@@ -221,13 +240,21 @@ class UserList:
 
           if graph != None:
             if not user in graph.nodes:
-              graph.add_node(user)
+              graph.add_node(user, label=user)
+              graph.nodes[user]['xlink:href'] = self.usersTasks[user].urlToFile
+              graphCsv[user] = dict()
             
             if not userB in graph.nodes:
-              graph.add_node(userB)
+              graph.add_node(userB, label=userB)
+              graph.nodes[userB]['xlink:href'] = self.usersTasks[userB].urlToFile
+              graphCsv[userB] = dict()
 
             graph.add_edge(user, userB)
-            graph.add_edge(userB, user, label=f'{round(res * 100)}%')
+            label = f'{round(res * 100)}%'
+            graph.add_edge(userB, user, label=label)
+
+            graphCsv[user][userB] = label
+            graphCsv[userB][user] = label
 
           if file:
             file.write(line + '\n')
@@ -252,8 +279,7 @@ if __name__ == "__main__":
 
   #newUserList = concat_files('data/sovaz1997/basic-js/src', '*.js')
   
-
-  userList = UserList(users, 'singolo', os.path.join('data'), 'index.html')
+  userList = UserList(users, 'singolo', os.path.join('data'), 'style.css')
   # users = concatenateAll('virtual-keyboard', users, 'virtual-keyboard', '*.js')
   #userList.updateUserList()
   userList.crossCheck()
