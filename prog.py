@@ -15,7 +15,7 @@ import sys
 sys.setrecursionlimit(10000)
 
 DOWNLOAD_DATA = False
-LIMIT = 0.55
+LIMIT = 0.5
 BUNDLE_FILENAME = 'clonecheckbundle.cc'
 
 from pathlib import Path
@@ -200,9 +200,16 @@ class UserList:
 
   def checkByValue(self, value):
     res = []
-    for user in self.usersTasks:
-      if self.usersTasks[user].check(value):
-        res.append(user)
+
+    with open('new-Function.txt', 'w') as f:
+      for user in self.usersTasks:
+        if self.usersTasks[user].check(value):
+          res.append(user)
+          f.writelines([f'User: {user}\n\n', self.usersTasks[user].getText()])
+          f.write('\n\n\n------------------------------------------------------\n\n\n')
+    
+
+
     return res
 
   def crossCheck(self):
@@ -213,7 +220,7 @@ class UserList:
     graphCsv = dict()
 
     i = 1
-    
+
     for userA in self.usersTasks:
       print(f'{i/len(self.usersTasks)*100}%')
       self.checkUser(userA, values, graph, graphCsv, file)
@@ -227,20 +234,25 @@ class UserList:
 
     nx.write_graphml(graph, 'graph.graphml')
 
-    with open('results.csv', 'w') as f:
+    with open('results.csv', 'w', newline='') as f:
       writer = csv.writer(f, delimiter=',')
       writer.writerow(['Number', 'User', 'Url', 'Data'])
 
       i = 1
-      for node in graphCsv:
-        line = [i, node, self.usersTasks[node].urlToFile]
-        
-        data = ''
-        for user in graphCsv[node]:
-          data += f'{user}: {graphCsv[node][user]}; '
-        i += 1
-        line.append(data)
-        writer.writerow(line)
+      
+      order = self.getComponents(graphCsv)
+
+      for component in order:
+        for node in component:
+          line = [i, node, self.usersTasks[node].urlToFile]
+          
+          data = ''
+          for user in graphCsv[node]:
+            data += f'{user}: {graphCsv[node][user]}; '
+          i += 1
+          line.append(data)
+          writer.writerow(line)
+        writer.writerow('')
   
   def getLinks(self):
     res = dict()
@@ -252,7 +264,7 @@ class UserList:
     allComponents = set()
     res = []
 
-    for i in graph.keys():
+    for i in list(graph):
       if not i in allComponents:
         localComponents = set()
         detectComponents(graph, i, localComponents)
@@ -315,9 +327,11 @@ if __name__ == "__main__":
 
   #newUserList = concat_files('data/sovaz1997/basic-js/src', '*.js')
   
-  userList = UserList(users, 'expression-calculator', os.path.join('data'), 'src/index.js')
-  #userList.crossCheck()
-  print(len(userList.checkByValue(r'new Function')))
+  userList = UserList(users, 'singolo', os.path.join('data'), 'index.html')
+  #userList.checkByValue(r'new Function')
+
+  #userList.updateUserList(userList.checkByValue(r'new Function'))
+  userList.crossCheck()
   
   #links = userList.getLinks()
   #svgReplace('expression-calculator.svg', links)
